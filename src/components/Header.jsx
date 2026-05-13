@@ -1,7 +1,6 @@
-import { menu } from "../data/menu"
 import logo from "../assets/LOGO_BAZZI.png"
 
-export default function Header({ activeCategory, setActiveCategory, cartCount, onInfo, onEspecial }) {
+export default function Header({ activeCategory, setActiveCategory, cartCount, onInfo, onEspecial, menu }) {
   return (
     <header className="bg-neutral-950 text-white sticky top-0 z-50 border-b" style={{ borderColor: "#2a2a2a" }}>
       <div className="px-4 pt-4 pb-3 flex justify-between items-center">

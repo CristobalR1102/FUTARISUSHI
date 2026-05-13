@@ -1,7 +1,6 @@
-import { menu } from "../data/menu"
 import ItemCard from "./ItemCard"
 
-export default function MenuGrid({ activeCategory, cart, onAdd, onRemove }) {
+export default function MenuGrid({ activeCategory, cart, onAdd, onRemove, menu }) {
   const section = menu.find((s) => s.category === activeCategory)
   if (!section) return null
 

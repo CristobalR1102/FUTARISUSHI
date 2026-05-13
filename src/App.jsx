@@ -1,5 +1,6 @@
-import { useState } from "react"
-import { menu } from "./data/menu"
+import { useState, useEffect } from "react"
+import { supabase } from "./supabase"
+import { WHATSAPP_NUMBER } from "./data/menu"
 import Header from "./components/Header"
 import MenuGrid from "./components/MenuGrid"
 import Cart from "./components/Cart"
@@ -10,11 +11,42 @@ import mezquita from "./assets/mezquita.png"
 import columna from "./assets/columna.png"
 
 export default function App() {
-  const [activeCategory, setActiveCategory] = useState(menu[0].category)
+  const [activeCategory, setActiveCategory] = useState("")
   const [cart, setCart] = useState({})
   const [showCheckout, setShowCheckout] = useState(false)
   const [showInfo, setShowInfo] = useState(false)
   const [showEspecial, setShowEspecial] = useState(false)
+  const [menuDB, setMenuDB] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchMenu = async () => {
+      const { data, error } = await supabase
+        .from("productos")
+        .select("*")
+        .eq("disponible", true)
+        .order("orden", { ascending: true })
+
+      if (error) {
+        console.error(error)
+      } else {
+        const agrupado = data.reduce((acc, item) => {
+          const cat = acc.find((c) => c.category === item.categoria)
+          if (cat) {
+            cat.items.push(item)
+          } else {
+            acc.push({ category: item.categoria, items: [item] })
+          }
+          return acc
+        }, [])
+        setMenuDB(agrupado)
+        if (agrupado.length > 0) setActiveCategory(agrupado[0].category)
+      }
+      setLoading(false)
+    }
+
+    fetchMenu()
+  }, [])
 
   const cartCount = Object.values(cart).reduce((sum, item) => sum + item.qty, 0)
 
@@ -37,6 +69,12 @@ export default function App() {
     })
   }
 
+  if (loading) return (
+    <div className="min-h-screen max-w-md mx-auto flex items-center justify-center" style={{ background: "#0a0a0a" }}>
+      <span className="text-sm tracking-widest text-neutral-500">Cargando menú...</span>
+    </div>
+  )
+
   if (showInfo) return <Info onBack={() => setShowInfo(false)} />
   if (showEspecial) return <Especial onBack={() => setShowEspecial(false)} />
   if (showCheckout) return <Checkout cart={cart} onBack={() => setShowCheckout(false)} />
@@ -44,15 +82,13 @@ export default function App() {
   return (
     <div className="min-h-screen max-w-md mx-auto relative overflow-hidden" style={{ background: "#0a0a0a" }}>
 
-      {/* Mezquita fondo */}
       <img
         src={mezquita}
         alt=""
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full pointer-events-none select-none"
-        style={{ opacity: 0.5, zIndex: 0 }}
+        style={{ opacity: 0.9, zIndex: 0 }}
       />
 
-      {/* Columna abajo espejada */}
       <img
         src={columna}
         alt=""
@@ -60,7 +96,6 @@ export default function App() {
         style={{ opacity: 0.50, zIndex: 0, transform: "translateX(-50%) scaleY(-1)" }}
       />
 
-      {/* Contenido */}
       <div className="relative" style={{ zIndex: 1 }}>
         <Header
           activeCategory={activeCategory}
@@ -68,12 +103,14 @@ export default function App() {
           cartCount={cartCount}
           onInfo={() => setShowInfo(true)}
           onEspecial={() => setShowEspecial(true)}
+          menu={menuDB}
         />
         <MenuGrid
           activeCategory={activeCategory}
           cart={cart}
           onAdd={handleAdd}
           onRemove={handleRemove}
+          menu={menuDB}
         />
         <Cart cart={cart} onCheckout={() => setShowCheckout(true)} />
       </div>
@@ -81,3 +118,4 @@ export default function App() {
     </div>
   )
 }
+

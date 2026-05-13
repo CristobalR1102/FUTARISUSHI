@@ -1,7 +1,7 @@
 export default function Cart({ cart, onCheckout }) {
   const items = Object.values(cart)
-  const total = items.reduce((sum, item) => sum + item.price * item.qty, 0)
-  const fmt = (n) => "$" + n.toLocaleString("es-CL")
+  const total = items.reduce((sum, item) => sum + Number(item.precio || item.price) * item.qty, 0)
+  const fmt = (n) => "$" + Number(n).toLocaleString("es-CL")
 
   if (items.length === 0) return null
 
@@ -18,8 +18,8 @@ export default function Cart({ cart, onCheckout }) {
       <div className="px-5 py-3 flex flex-col gap-1 overflow-y-auto flex-1">
         {items.map((item) => (
           <div key={item.id} className="flex justify-between text-sm">
-            <span className="text-neutral-400">{item.name} <span className="text-neutral-600">x{item.qty}</span></span>
-            <span className="text-white font-medium">{fmt(item.price * item.qty)}</span>
+            <span className="text-neutral-400">{item.nombre || item.name} <span className="text-neutral-600">x{item.qty}</span></span>
+            <span className="text-white font-medium">{fmt(Number(item.precio || item.price) * item.qty)}</span>
           </div>
         ))}
       </div>
