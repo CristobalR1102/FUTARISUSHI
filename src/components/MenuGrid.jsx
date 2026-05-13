@@ -7,7 +7,7 @@ export default function MenuGrid({ activeCategory, cart, onAdd, onRemove }) {
 
   return (
     <main className="px-4 py-5 pb-40">
-      <h2 className="font-black text-2xl tracking-widest text-neutral-800 mb-4 uppercase">
+      <h2 className="font-black text-2xl tracking-widest mb-4 uppercase" style={{ color: "#ffffff" }}>
         {section.category}
       </h2>
       <div className="flex flex-col gap-3">

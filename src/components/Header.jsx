@@ -4,9 +4,16 @@ export default function Header({ activeCategory, setActiveCategory, cartCount, o
   return (
     <header className="bg-neutral-950 text-white sticky top-0 z-50 border-b" style={{ borderColor: "#2a2a2a" }}>
       <div className="px-5 pt-5 pb-3 flex justify-between items-center">
-        <div>
-          <div className="font-black text-3xl tracking-widest" style={{ color: "var(--gold)" }}>BAZZI</div>
-          <div className="text-xs tracking-widest text-neutral-400 mt-0.5">ARABIAN FOOD</div>
+        <div className="flex items-center gap-3">
+          <img
+            src="src/assets/LOGO_BAZZI.png"
+            alt="Bazzi Logo"
+            className="h-16 w-16 object-contain"
+          />
+          <div>
+            <div className="font-black text-3xl tracking-widest" style={{ color: "var(--gold)" }}>BAZZI</div>
+            <div className="text-xs tracking-widest text-neutral-400 mt-0.5">ARABIAN FOOD</div>
+          </div>
         </div>
         <div className="flex items-center gap-2">
           <button

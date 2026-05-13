@@ -37,7 +37,27 @@ export default function App() {
   if (showCheckout) return <Checkout cart={cart} onBack={() => setShowCheckout(false)} />
 
   return (
-    <div className="min-h-screen max-w-md mx-auto" style={{ background: "#0a0a0a" }}>
+  <div className="min-h-screen max-w-md mx-auto relative overflow-hidden" style={{ background: "#0a0a0a" }}>
+
+
+    {/* Mezquita fondo */}
+    <img
+      src="/src/assets/mezquita.png"
+      alt=""
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full pointer-events-none select-none"
+      style={{ opacity: 0.5, zIndex: 0 }}
+    />
+
+    {/* Columna abajo espejada */}
+    <img
+      src="/src/assets/columna.png"
+      alt=""
+      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full pointer-events-none select-none"
+      style={{ opacity: 0.50, zIndex: 0, transform: "translateX(-50%) scaleY(-1)" }}
+    />
+
+    {/* Contenido */}
+    <div className="relative" style={{ zIndex: 1 }}>
       <Header
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
@@ -52,5 +72,7 @@ export default function App() {
       />
       <Cart cart={cart} onCheckout={() => setShowCheckout(true)} />
     </div>
-  )
+
+  </div>
+)
 }

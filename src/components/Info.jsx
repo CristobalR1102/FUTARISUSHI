@@ -39,7 +39,17 @@ export default function Info({ onBack }) {
           <span className="text-xs tracking-widest text-neutral-400 uppercase mb-2">Dirección</span>
           <span className="text-white text-sm font-medium">El Descanso 1400, Local 17</span>
           <span className="text-neutral-400 text-sm">Maipú, Región Metropolitana</span>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=El+Descanso+1400+Local+17+Maipú"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 w-full text-center rounded-xl py-3 text-sm font-semibold tracking-wide transition-opacity hover:opacity-85"
+            style={{ background: "var(--gold)", color: "#0a0a0a" }}
+        >
+            Ver en Google Maps
+        </a>
         </div>
+
 
         <div className="border rounded-xl p-5" style={{ background: "#111111", borderColor: "#2a2a2a" }}>
           <div className="flex justify-between items-center mb-4">
