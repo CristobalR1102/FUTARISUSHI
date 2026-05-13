@@ -6,7 +6,7 @@ export default function Cart({ cart, onCheckout }) {
   if (items.length === 0) return null
 
   return (
-    <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-50 border-t" style={{ background: "#0a0a0a", borderColor: "#2a2a2a" }}>
+    <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-50 border-t overflow-hidden" style={{ background: "#0a0a0a", borderColor: "#2a2a2a", maxHeight: "45vh" }}>
       <div className="px-5 py-4">
         <div className="flex justify-between items-center mb-4">
           <span className="text-sm text-neutral-500">
@@ -15,7 +15,7 @@ export default function Cart({ cart, onCheckout }) {
           <span className="font-black text-lg tracking-wide" style={{ color: "var(--gold)" }}>{fmt(total)}</span>
         </div>
 
-        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-50 border-t" style={{ background: "#0a0a0a", borderColor: "#2a2a2a", maxHeight: "45vh" }}>
+        <div className="flex flex-col gap-1 mb-4 max-h-24 overflow-y-auto">
           {items.map((item) => (
             <div key={item.id} className="flex justify-between text-sm">
               <span className="text-neutral-400">{item.name} <span className="text-neutral-600">x{item.qty}</span></span>
