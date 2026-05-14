@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { WHATSAPP_NUMBER } from "../data/menu"
 
-export default function Checkout({ cart, onBack }) {
+export default function Checkout({ cart, onBack, onAdd, onRemove }) {
   const [nombre, setNombre] = useState("")
   const [pago, setPago] = useState("")
   const [horario, setHorario] = useState("ahora")
@@ -48,9 +48,26 @@ export default function Checkout({ cart, onBack }) {
 
         <div className="border rounded-xl p-4 flex flex-col gap-2" style={{ background: "#111111", borderColor: "#2a2a2a" }}>
           {items.map((item) => (
-            <div key={item.id} className="flex justify-between text-sm">
-              <span className="text-neutral-400">{item.nombre || item.name} <span className="text-neutral-600">x{item.qty}</span></span>
-              <span className="text-white font-medium">{fmt(Number(item.precio || item.price) * item.qty)}</span>
+            <div key={item.id} className="flex justify-between items-center text-sm gap-2">
+              <span className="text-neutral-400 flex-1">{item.nombre || item.name}</span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => onRemove(item)}
+                  className="w-7 h-7 rounded-full border flex items-center justify-center text-base hover:bg-neutral-800 transition-colors"
+                  style={{ borderColor: "#404040", color: "#a3a3a3" }}
+                >
+                  -
+                </button>
+                <span className="text-white font-medium w-4 text-center">{item.qty}</span>
+                <button
+                  onClick={() => onAdd(item)}
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-base hover:opacity-80 transition-opacity"
+                  style={{ background: "var(--gold)", color: "#0a0a0a" }}
+                >
+                  +
+                </button>
+              </div>
+              <span className="text-white font-medium min-w-16 text-right">{fmt(Number(item.precio || item.price) * item.qty)}</span>
             </div>
           ))}
           <div className="border-t pt-3 mt-1 flex justify-between" style={{ borderColor: "#2a2a2a" }}>

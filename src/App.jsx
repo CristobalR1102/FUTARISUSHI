@@ -79,7 +79,7 @@ export default function App() {
 
   if (showInfo) return <Info onBack={() => setShowInfo(false)} />
   if (showEspecial) return <Especial onBack={() => setShowEspecial(false)} />
-  if (showCheckout) return <Checkout cart={cart} onBack={() => setShowCheckout(false)} />
+  if (showCheckout) return <Checkout cart={cart} onBack={() => setShowCheckout(false)} onAdd={handleAdd} onRemove={handleRemove} />
 
   return (
     <Routes>
