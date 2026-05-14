@@ -8,15 +8,15 @@ export default function Checkout({ cart, onBack }) {
   const [hora, setHora] = useState("")
 
   const items = Object.values(cart)
-  const total = items.reduce((sum, item) => sum + item.price * item.qty, 0)
-  const fmt = (n) => "$" + n.toLocaleString("es-CL")
+  const total = items.reduce((sum, item) => sum + Number(item.precio || item.price) * item.qty, 0)
+  const fmt = (n) => "$" + Number(n).toLocaleString("es-CL")
 
   const sendWhatsApp = () => {
     if (!nombre.trim()) { alert("Ingresa tu nombre para continuar."); return }
     if (!pago) { alert("Selecciona un método de pago."); return }
     if (horario === "programado" && !hora) { alert("Ingresa la hora para tu pedido."); return }
 
-    const lines = items.map((i) => `• ${i.name} x${i.qty} — ${fmt(i.price * i.qty)}`).join("\n")
+    const lines = items.map((i) => `• ${i.nombre || i.name} x${i.qty} — ${fmt(Number(i.precio || i.price) * i.qty)}`).join("\n")
     const horarioTexto = horario === "ahora" ? "Lo antes posible" : `Para las ${hora}`
 
     const msg =
@@ -49,8 +49,8 @@ export default function Checkout({ cart, onBack }) {
         <div className="border rounded-xl p-4 flex flex-col gap-2" style={{ background: "#111111", borderColor: "#2a2a2a" }}>
           {items.map((item) => (
             <div key={item.id} className="flex justify-between text-sm">
-              <span className="text-neutral-400">{item.name} <span className="text-neutral-600">x{item.qty}</span></span>
-              <span className="text-white font-medium">{fmt(item.price * item.qty)}</span>
+              <span className="text-neutral-400">{item.nombre || item.name} <span className="text-neutral-600">x{item.qty}</span></span>
+              <span className="text-white font-medium">{fmt(Number(item.precio || item.price) * item.qty)}</span>
             </div>
           ))}
           <div className="border-t pt-3 mt-1 flex justify-between" style={{ borderColor: "#2a2a2a" }}>
