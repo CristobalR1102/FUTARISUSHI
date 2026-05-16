@@ -1,4 +1,4 @@
-import logo from "../assets/LOGO_BAZZI_CHICKEN.JPEG"
+import logo from "../assets/LOGO_BAZZI_CHICKEN.jpg"
 
 export default function Header({ activeCategory, setActiveCategory, cartCount, onInfo, onEspecial, menu }) {
   return (
