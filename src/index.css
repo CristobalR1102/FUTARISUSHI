@@ -2,15 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #0a0a0a;
-}
-
 html, body, #root {
   height: 100%;
 }
 
 :root {
-  --gold: #C9A84C;
-  --gold-light: #E8C96A;
+  --gold: #FF5722;
+  --gold-light: #FF7043;
+}
+body {
+  background-color: #0a0a0a;
 }

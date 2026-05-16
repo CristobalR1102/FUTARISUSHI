@@ -1,4 +1,4 @@
-import logo from "../assets/LOGO_BAZZI.png"
+import logo from "../assets/LOGO_BAZZI_CHICKEN.JPEG"
 
 export default function Header({ activeCategory, setActiveCategory, cartCount, onInfo, onEspecial, menu }) {
   return (
@@ -7,8 +7,8 @@ export default function Header({ activeCategory, setActiveCategory, cartCount, o
         <div className="flex items-center gap-2">
           <img src={logo} alt="Bazzi Logo" className="h-12 w-12 object-contain" />
           <div>
-            <div className="font-black text-2xl tracking-widest" style={{ color: "var(--gold)" }}>BAZZI</div>
-            <div className="text-xs tracking-widest text-neutral-400 mt-0.5">ARABIAN FOOD</div>
+            <div className="font-black text-2xl tracking-widest" style={{ color: "var(--gold)" }}>BAZZI CHICKEN</div>
+            <div className="text-xs tracking-widest text-neutral-400 mt-0.5">MÁS QUE POLLOS</div>
           </div>
         </div>
         <div className="flex items-center gap-1.5">

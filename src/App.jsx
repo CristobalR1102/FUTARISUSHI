@@ -9,8 +9,6 @@ import CartDesktop from "./components/CartDesktop"
 import Checkout from "./components/Checkout"
 import Info from "./components/Info"
 import Especial from "./components/Especial"
-import mezquita from "./assets/mezquita.png"
-import columna from "./assets/columna.png"
 
 export default function App() {
   const [activeCategory, setActiveCategory] = useState("")
@@ -72,7 +70,7 @@ export default function App() {
   }
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: "#0a0a0a" }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: "radial-gradient(ellipse at top, #1a0a00 0%, #0a0a0a 70%)" }}>
       <span className="text-sm tracking-widest text-neutral-500">Cargando menú...</span>
     </div>
   )
@@ -84,10 +82,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={
-        <div className="min-h-screen relative" style={{ background: "#0a0a0a" }}>
-          <img src={mezquita} alt="" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full pointer-events-none select-none" style={{ opacity: 0.9, zIndex: 0 }} />
-          <img src={columna} alt="" className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full pointer-events-none select-none" style={{ opacity: 0.50, zIndex: 0, transform: "translateX(-50%) scaleY(-1)" }} />
-
+       <div className="min-h-screen relative" style={{ background: "radial-gradient(ellipse at top, #1a0a00 0%, #0a0a0a 70%)" }}>
           <div className="relative" style={{ zIndex: 1 }}>
             <Header activeCategory={activeCategory} setActiveCategory={setActiveCategory} cartCount={cartCount} onInfo={() => setShowInfo(true)} onEspecial={() => setShowEspecial(true)} menu={menuDB} />
 

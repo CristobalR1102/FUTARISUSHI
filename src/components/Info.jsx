@@ -37,10 +37,10 @@ const minutos = ahora.getHours() * 60 + ahora.getMinutes()
 
         <div className="border rounded-xl p-5 flex flex-col gap-1" style={{ background: "#111111", borderColor: "#2a2a2a" }}>
           <span className="text-xs tracking-widest text-neutral-400 uppercase mb-2">Dirección</span>
-          <span className="text-white text-sm font-medium">El Descanso 1400, Local 17</span>
+          <span className="text-sm font-medium text-white">Av. El Descanso 1400, Local 14</span>
           <span className="text-neutral-400 text-sm">Maipú, Región Metropolitana</span>
           <a
-            href="https://www.google.com/maps/search/?api=1&query=El+Descanso+1400+Local+17+Maipú"
+            href="https://www.google.com/maps/search/?api=1&query=Av+El+Descanso+1400+Local+14+Maipu"
             target="_blank"
             rel="noreferrer"
             className="mt-3 w-full text-center rounded-xl py-3 text-sm font-semibold tracking-wide transition-opacity hover:opacity-85"
