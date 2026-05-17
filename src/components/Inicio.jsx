@@ -5,7 +5,7 @@ import foto2 from "../assets/foto_inicio2.jpg"
 
 const fotos = [foto1, foto2]
 
-export default function Inicio({ onVerMenu }) {
+export default function Inicio({ onVerMenu,onEspecial }) {
   const [fotoActual, setFotoActual] = useState(0)
   const touchStartX = useRef(null)
 
@@ -53,7 +53,7 @@ export default function Inicio({ onVerMenu }) {
             className="absolute inset-0 transition-opacity duration-700"
             style={{ opacity: i === fotoActual ? 1 : 0 }}
           >
-            <img src={foto} alt={`Foto ${i + 1}`} className="w-full h-full object-cover" />
+            <img src={foto} alt={`Foto ${i + 1}`} className="w-full h-full object-cover object-top" />
           </div>
         ))}
 
@@ -80,13 +80,20 @@ export default function Inicio({ onVerMenu }) {
         </p>
       </div>
 
-      <div className="px-4 mt-auto pb-10 pt-8">
+      <div className="px-4 mt-auto pb-10 pt-8 flex flex-col gap-5">
         <button
           onClick={onVerMenu}
           className="w-full rounded-2xl py-5 font-black text-lg tracking-widest transition-opacity hover:opacity-85"
           style={{ background: "var(--gold)", color: "#0a0a0a" }}
         >
           VER MENÚ
+        </button>
+        <button
+          onClick={onEspecial}
+          className="w-full rounded-2xl py-4 font-black text-sm tracking-widest transition-opacity hover:opacity-85"
+          style={{ background: "var(--gold)", color: "#0a0a0a" }}
+        >
+          SERVICIOS ESPECIALES
         </button>
       </div>
 

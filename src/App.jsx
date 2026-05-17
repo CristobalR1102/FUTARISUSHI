@@ -77,10 +77,11 @@ export default function App() {
     </div>
   )
 
-  if (showInicio) return <Inicio onVerMenu={() => setShowInicio(false)} />
+  if (showInicio) return <Inicio onVerMenu={() => setShowInicio(false)} onEspecial={() => { setShowInicio(false); setShowEspecial(true) }} />
   if (showInfo) return <Info onBack={() => setShowInfo(false)} />
   if (showEspecial) return <Especial onBack={() => setShowEspecial(false)} />
   if (showCheckout) return <Checkout cart={cart} onBack={() => setShowCheckout(false)} onAdd={handleAdd} onRemove={handleRemove} />
+  if (showInicio) return <Inicio onVerMenu={() => setShowInicio(false)} onEspecial={() => setShowEspecial(true)} />
 
   return (
     <Routes>

@@ -18,14 +18,7 @@ export default function Header({ activeCategory, setActiveCategory, cartCount, o
             style={{ borderColor: "#404040", color: "#a3a3a3" }}
           >
             Info
-          </button>
-          <button
-            onClick={onEspecial}
-            className="text-xs border rounded-full px-3 py-1.5 transition-colors hover:bg-neutral-800"
-            style={{ borderColor: "#404040", color: "#a3a3a3" }}
-          >
-            Especial
-          </button>
+          </button> 
           <div
             className="text-xs font-medium border rounded-full px-3 py-1.5"
             style={{ borderColor: "var(--gold)", color: "var(--gold)" }}
