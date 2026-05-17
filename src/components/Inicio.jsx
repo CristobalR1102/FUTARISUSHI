@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from "react"
 import logo from "../assets/LOGO_BAZZI_CHICKEN.jpg"
 import foto1 from "../assets/foto_inicio1.jpg"
 import foto2 from "../assets/foto_inicio2.jpg"
+import foto3 from "../assets/foto_inicio3.jpg"
 
-const fotos = [foto1, foto2]
+const fotos = [foto1, foto2, foto3]
 
 export default function Inicio({ onVerMenu,onEspecial }) {
   const [fotoActual, setFotoActual] = useState(0)
@@ -43,7 +44,7 @@ export default function Inicio({ onVerMenu,onEspecial }) {
 
       <div
         className="relative mx-4 rounded-2xl overflow-hidden"
-        style={{ height: "380px" }}
+        style={{ height: "500px" }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
     >       
@@ -53,7 +54,7 @@ export default function Inicio({ onVerMenu,onEspecial }) {
             className="absolute inset-0 transition-opacity duration-700"
             style={{ opacity: i === fotoActual ? 1 : 0 }}
           >
-            <img src={foto} alt={`Foto ${i + 1}`} className="w-full h-full object-cover object-top" />
+            <img src={foto} alt={`Foto ${i + 1}`} className="w-full h-full object-cover" />
           </div>
         ))}
 
