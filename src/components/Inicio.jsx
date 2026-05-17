@@ -43,10 +43,10 @@ export default function Inicio({ onVerMenu }) {
 
       <div
         className="relative mx-4 rounded-2xl overflow-hidden"
-        style={{ height: "220px" }}
+        style={{ height: "380px" }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-      >
+    >       
         {fotos.map((foto, i) => (
           <div
             key={i}
