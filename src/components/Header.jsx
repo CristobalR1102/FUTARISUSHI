@@ -1,16 +1,16 @@
-import logo from "../assets/LOGO_BAZZI_CHICKEN.jpg"
+import logo from "../assets/LOGGO_BAZZI_CHICKEN.png"
 
-export default function Header({ activeCategory, setActiveCategory, cartCount, onInfo, onEspecial, menu }) {
+export default function Header({ activeCategory, setActiveCategory, cartCount, onInfo, menu, onInicio }) {
   return (
     <header className="bg-neutral-950 text-white sticky top-0 z-50 border-b" style={{ borderColor: "#2a2a2a" }}>
       <div className="max-w-7xl mx-auto px-4 pt-4 pb-3 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <img src={logo} alt="Bazzi Logo" className="h-12 w-12 object-contain" />
-          <div>
-            <div className="font-black text-2xl tracking-widest" style={{ color: "var(--gold)" }}>BAZZI CHICKEN</div>
-            <div className="text-xs tracking-widest text-neutral-400 mt-0.5">MÁS QUE POLLOS</div>
-          </div>
+        <div className="flex items-center gap-2 cursor-pointer" onClick={onInicio}>
+          <img src={logo} alt="Bazzi Logo" className="h-20 w-20 object-contain" />
+        <div>
+          <div className="font-black text-2xl tracking-widest" style={{ color: "var(--gold)" }}>BAZZI CHICKEN</div>
+          <div className="text-xs tracking-widest text-neutral-400 mt-0.5">MÁS QUE POLLOS</div>
         </div>
+      </div>
         <div className="flex items-center gap-1.5">
           <button
             onClick={onInfo}

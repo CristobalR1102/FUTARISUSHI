@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import logo from "../assets/LOGO_BAZZI_CHICKEN.jpg"
+import logo from "../assets/LOGGO_BAZZI_CHICKEN.png"
 import foto1 from "../assets/foto_inicio1.jpg"
 import foto2 from "../assets/foto_inicio2.jpg"
 import foto3 from "../assets/foto_inicio3.jpg"
@@ -33,7 +33,7 @@ export default function Inicio({ onVerMenu,onEspecial }) {
     <div className="min-h-screen flex flex-col" style={{ background: "#0a0a0a" }}>
 
       <div className="flex flex-col items-center justify-center pt-16 pb-8 px-6">
-        <img src={logo} alt="Bazzi Chicken" className="w-36 h-36 object-contain mb-6" />
+        <img src={logo} alt="Bazzi Chicken" className="w-52 h-52 object-contain mb-6" />
         <h1 className="font-black text-4xl tracking-widest text-center mb-2" style={{ color: "var(--gold)" }}>
           BAZZI CHICKEN
         </h1>

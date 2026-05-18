@@ -16,7 +16,10 @@ export default function Checkout({ cart, onBack, onAdd, onRemove }) {
     if (!pago) { alert("Selecciona un método de pago."); return }
     if (horario === "programado" && !hora) { alert("Ingresa la hora para tu pedido."); return }
 
-    const lines = items.map((i) => `• ${i.nombre || i.name} x${i.qty} — ${fmt(Number(i.precio || i.price) * i.qty)}`).join("\n")
+    const lines = items.map((i) => {
+      const agregados = i.agregados && i.agregados.length > 0 ? ` (${i.agregados.join(", ")})` : ""
+      return `• ${i.nombre || i.name}${agregados} x${i.qty} — ${fmt(Number(i.precio || i.price) * i.qty)}`
+    }).join("\n")
     const horarioTexto = horario === "ahora" ? "Lo antes posible" : `Para las ${hora}`
 
     const msg =
@@ -49,7 +52,12 @@ export default function Checkout({ cart, onBack, onAdd, onRemove }) {
         <div className="border rounded-xl p-4 flex flex-col gap-2" style={{ background: "#111111", borderColor: "#2a2a2a" }}>
           {items.map((item) => (
             <div key={item.id} className="flex justify-between items-center text-sm gap-2">
-              <span className="text-neutral-400 flex-1">{item.nombre || item.name}</span>
+              <span className="flex-1" style={{ color: "#a3a3a3" }}>
+                {item.nombre || item.name}
+                {item.agregados && item.agregados.length > 0 && (
+                  <span className="block text-xs" style={{ color: "#606060" }}>{item.agregados.join(", ")}</span>
+                )}
+              </span>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => onRemove(item)}

@@ -18,8 +18,13 @@ export default function Cart({ cart, onCheckout }) {
       <div className="px-5 py-3 flex flex-col gap-1 overflow-y-auto flex-1">
         {items.map((item) => (
           <div key={item.id} className="flex justify-between text-sm">
-            <span className="text-neutral-400">{item.nombre || item.name} <span className="text-neutral-600">x{item.qty}</span></span>
-            <span className="text-white font-medium">{fmt(Number(item.precio || item.price) * item.qty)}</span>
+            <span style={{ color: "#a3a3a3" }}>
+              {item.nombre || item.name}
+              {item.agregados && item.agregados.length > 0 && (
+              <span style={{ color: "#606060" }}> · {item.agregados.join(", ")}</span>
+            )}
+            <span style={{ color: "#606060" }}> x{item.qty}</span>
+            </span>
           </div>
         ))}
       </div>

@@ -88,7 +88,14 @@ export default function App() {
       <Route path="/" element={
        <div className="min-h-screen relative" style={{ background: "radial-gradient(ellipse at top, #2d1200 0%, #0a0a0a 50%)" }}>
           <div className="relative" style={{ zIndex: 1 }}>
-            <Header activeCategory={activeCategory} setActiveCategory={setActiveCategory} cartCount={cartCount} onInfo={() => setShowInfo(true)} onEspecial={() => setShowEspecial(true)} menu={menuDB} />
+            <Header
+              activeCategory={activeCategory}
+              setActiveCategory={setActiveCategory}
+              cartCount={cartCount}
+              onInfo={() => setShowInfo(true)}
+              menu={menuDB}
+              onInicio={() => setShowInicio(true)}
+            />
 
             <div className="max-w-7xl mx-auto px-4 lg:flex lg:gap-8 lg:pt-6">
               <div className="lg:flex-1">
