@@ -3,7 +3,7 @@ import { useState } from "react"
 const AGREGADOS = ["Arroz", "Papas fritas", "Ensalada"]
 
 export default function ItemCard({ item, qty, onAdd, onRemove }) {
-  const [expanded, setExpanded] = useState(false)
+  const [expanded, setExpanded] = useState(true)
   const [showAgregados, setShowAgregados] = useState(false)
   const [seleccionados, setSeleccionados] = useState([])
 
