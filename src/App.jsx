@@ -73,8 +73,8 @@ export default function App() {
   }
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: "radial-gradient(ellipse at top, #2d1200 0%, #0a0a0a 50%)" }}>
-      <span className="text-sm tracking-widest text-neutral-500">Cargando menú...</span>
+    <div className="min-h-screen flex items-center justify-center app-surface">
+      <span className="text-sm tracking-widest" style={{ color: "var(--muted)" }}>Cargando menú...</span>
     </div>
   )
 
@@ -87,7 +87,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={
-       <div className="min-h-screen relative" style={{ background: "radial-gradient(ellipse at top, #2d1200 0%, #0a0a0a 50%)" }}>
+       <div className="min-h-screen relative app-surface">
           <div className="relative" style={{ zIndex: 1 }}>
             <Header
               activeCategory={activeCategory}

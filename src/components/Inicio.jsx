@@ -6,7 +6,7 @@ import foto3 from "../assets/foto_inicio3.jpg"
 
 const fotos = [foto1, foto2, foto3]
 
-export default function Inicio({ onVerMenu,onEspecial }) {
+export default function Inicio({ onVerMenu, onEspecial }) {
   const [fotoActual, setFotoActual] = useState(0)
   const touchStartX = useRef(null)
 
@@ -28,6 +28,7 @@ export default function Inicio({ onVerMenu,onEspecial }) {
     if (diff < -50) setFotoActual((prev) => (prev - 1 + fotos.length) % fotos.length)
     touchStartX.current = null
   }
+
   const ahora = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Santiago" }))
   const dia = ahora.getDay()
   const minutos = ahora.getHours() * 60 + ahora.getMinutes()
@@ -38,24 +39,26 @@ export default function Inicio({ onVerMenu,onEspecial }) {
   })()
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "#0a0a0a" }}>
-
-      <div className="flex flex-col items-center justify-center pt-16 pb-8 px-6">
-        <img src={logo} alt="Bazzi Chicken" className="w-52 h-52 object-contain mb-6" />
-        <h1 className="font-black text-4xl tracking-widest text-center mb-2" style={{ color: "var(--gold)" }}>
-          BAZZI CHICKEN
-        </h1>
-        <p className="text-sm tracking-widest text-center" style={{ color: "#8B6020" }}>
-          MÁS QUE POLLOS
-        </p>
-      </div>
+    <div className="min-h-screen flex flex-col app-surface safe-bottom">
+      <section className="px-4 pt-8 pb-4">
+        <div className="max-w-md mx-auto flex items-center gap-4">
+          <img src={logo} alt="Bazzi Chicken" className="w-24 h-24 object-contain drop-shadow-[0_12px_28px_rgba(255,106,26,0.24)]" />
+          <div className="min-w-0">
+            <p className="text-xs tracking-[0.22em] uppercase" style={{ color: "var(--muted)" }}>Maipú</p>
+            <h1 className="font-black text-4xl tracking-[0.08em] leading-none mt-1" style={{ color: "var(--gold)" }}>
+              BAZZI
+            </h1>
+            <p className="font-black text-xl tracking-[0.12em] leading-none text-white">CHICKEN</p>
+          </div>
+        </div>
+      </section>
 
       <div
-        className="relative mx-4 rounded-2xl overflow-hidden"
-        style={{ height: "500px" }}
+        className="relative mx-4 w-[calc(100%-2rem)] max-w-md sm:mx-auto sm:w-full rounded-[1.75rem] overflow-hidden border"
+        style={{ height: "min(58vh, 520px)", minHeight: "370px", borderColor: "var(--line)", boxShadow: "0 26px 60px rgba(0,0,0,0.42)" }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-    >       
+      >
         {fotos.map((foto, i) => (
           <div
             key={i}
@@ -66,51 +69,54 @@ export default function Inicio({ onVerMenu,onEspecial }) {
           </div>
         ))}
 
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.04) 24%, rgba(7,4,2,0.78) 100%)" }} />
+
+        <div className="absolute left-5 right-5 bottom-5">
+          <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold mb-3" style={{ background: abierto ? "rgba(20, 83, 45, 0.82)" : "rgba(127, 29, 29, 0.82)", color: abierto ? "#bbf7d0" : "#fecaca" }}>
+            <span className="w-2 h-2 rounded-full" style={{ background: abierto ? "#4ade80" : "#f87171" }} />
+            {abierto ? "Abierto ahora" : "Cerrado ahora"}
+          </div>
+          <p className="text-3xl font-black leading-tight text-white">Pollo asado, papas y sabor de barrio.</p>
+        </div>
+
+        <div className="absolute top-4 right-4 flex gap-2">
           {fotos.map((_, i) => (
             <div
               key={i}
-              className="w-2 h-2 rounded-full transition-all"
-              style={{ background: i === fotoActual ? "var(--gold)" : "#404040" }}
+              className="h-2 rounded-full transition-all"
+              style={{ width: i === fotoActual ? "22px" : "8px", background: i === fotoActual ? "var(--gold)" : "rgba(255,255,255,0.45)" }}
             />
           ))}
         </div>
       </div>
 
-      <div className="mx-4 mt-4 border rounded-xl p-4" style={{ background: "#111111", borderColor: "#2a2a2a" }}>
-        <p className="text-xs text-center" style={{ color: "#606060" }}>
-          Av. El Descanso 1400, Local 14 — Maipú
-        </p>
-        <p className="text-xs text-center mt-1" style={{ color: "#606060" }}>
-            Martes a Domingo · 13:00 - 22:00
-        </p>
-        <p className="text-xs text-center mt-1" style={{ color: "#606060" }}>
-        Lunes cerrado
-        </p>
+      <div className="mx-4 max-w-md sm:mx-auto mt-4 glass-panel rounded-2xl p-4">
+        <p className="text-sm text-center font-semibold text-white">Av. El Descanso 1400, Local 14, Maipú</p>
+        <p className="text-xs text-center mt-1" style={{ color: "var(--muted)" }}>Martes a Domingo · 13:00 - 22:00 · Lunes cerrado</p>
       </div>
-          {!abierto && (
-            <div className="mx-4 mt-3 border rounded-xl p-4 text-center" style={{ background: "#1a0000", borderColor: "#4a0000" }}>
-              <p className="text-sm font-semibold" style={{ color: "#ff4444" }}>Estamos cerrados en este momento</p>
-              <p className="text-xs mt-1" style={{ color: "#606060" }}>Martes a Domingo · 13:00 - 22:00</p>
-            </div>
-          )}
-      <div className="px-4 mt-auto pb-10 pt-8 flex flex-col gap-5">
+
+      {!abierto && (
+        <div className="mx-4 max-w-md sm:mx-auto mt-3 border rounded-2xl p-4 text-center" style={{ background: "rgba(55, 10, 10, 0.76)", borderColor: "rgba(248, 113, 113, 0.26)" }}>
+          <p className="text-sm font-semibold text-red-200">Estamos cerrados en este momento</p>
+          <p className="text-xs mt-1" style={{ color: "var(--muted)" }}>Volvemos de martes a domingo, 13:00 - 22:00</p>
+        </div>
+      )}
+
+      <div className="px-4 max-w-md sm:mx-auto w-full mt-auto pb-4 pt-6 flex flex-col gap-3">
         <button
           onClick={onVerMenu}
-          className="w-full rounded-2xl py-5 font-black text-lg tracking-widest transition-opacity hover:opacity-85"
-          style={{ background: "var(--gold)", color: "#0a0a0a" }}
+          className="w-full rounded-2xl py-5 font-black text-lg tracking-widest transition-all hover:brightness-110 warm-button"
         >
           VER MENÚ
         </button>
         <button
           onClick={onEspecial}
-          className="w-full rounded-2xl py-4 font-black text-sm tracking-widest transition-opacity hover:opacity-85"
-          style={{ background: "var(--gold)", color: "#0a0a0a" }}
+          className="w-full rounded-2xl py-4 font-black text-sm tracking-widest transition-colors border"
+          style={{ background: "rgba(255,255,255,0.04)", borderColor: "var(--line)", color: "var(--paper)" }}
         >
           SERVICIOS ESPECIALES
         </button>
       </div>
-
     </div>
   )
 }

@@ -5,11 +5,14 @@ export default function MenuGrid({ activeCategory, cart, onAdd, onRemove, menu }
   if (!section) return null
 
   return (
-    <main className="px-4 py-5 pb-64">
-      <h2 className="font-black text-2xl tracking-widest mb-4 uppercase" style={{ color: "#ffffff" }}>
-        {section.category}
-      </h2>
-      <div className="flex flex-col gap-3">
+    <main className="px-3 sm:px-4 py-5 pb-64">
+      <div className="mb-4">
+        <p className="text-xs tracking-[0.22em] uppercase" style={{ color: "var(--muted)" }}>Menú Bazzi</p>
+        <h2 className="font-black text-3xl tracking-[0.04em] uppercase leading-tight text-white">
+          {section.category}
+        </h2>
+      </div>
+      <div className="flex flex-col gap-3.5">
         {section.items.map((item) => (
           <ItemCard
             key={item.id}

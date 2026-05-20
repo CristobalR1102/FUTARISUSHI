@@ -18,41 +18,42 @@ export default function Especial({ onBack }) {
 ]
 
   return (
-    <div className="min-h-screen max-w-md mx-auto pb-10" style={{ background: "#0a0a0a" }}>
-
-      <div className="px-5 pt-6 pb-4 flex items-center gap-4 border-b" style={{ borderColor: "#2a2a2a" }}>
+    <div className="min-h-screen max-w-md mx-auto pb-10 app-surface">
+      <div className="px-5 pt-6 pb-4 flex items-center gap-4 border-b backdrop-blur-xl sticky top-0 z-20" style={{ borderColor: "var(--line)", background: "rgba(8, 5, 4, 0.88)" }}>
         <button
           onClick={onBack}
-          className="text-sm border rounded-full px-4 py-1.5 transition-colors hover:bg-neutral-800"
-          style={{ borderColor: "#404040", color: "#a3a3a3" }}
+          className="text-sm border rounded-full px-4 py-2 transition-colors hover:bg-white/10"
+          style={{ borderColor: "var(--line)", color: "var(--muted)" }}
         >
           Volver
         </button>
         <span className="font-black text-xl tracking-widest" style={{ color: "var(--gold)" }}>Especial</span>
       </div>
 
-      <div className="px-5 pt-6 flex flex-col gap-4">
+      <div className="px-4 pt-5 flex flex-col gap-4">
+        <div>
+          <p className="text-xs tracking-[0.22em] uppercase" style={{ color: "var(--muted)" }}>Para grupos</p>
+          <h1 className="text-3xl font-black leading-tight text-white">Bazzi para eventos y empresas</h1>
+        </div>
 
         {servicios.map((s) => (
-          <div key={s.titulo} className="border rounded-xl p-5 flex flex-col gap-2" style={{ background: "#111111", borderColor: "#2a2a2a" }}>
-            <span className="font-black text-base tracking-wide" style={{ color: "var(--gold)" }}>{s.titulo}</span>
-            <p className="text-sm text-neutral-400 leading-relaxed">{s.desc}</p>
+          <div key={s.titulo} className="glass-panel rounded-2xl p-5 flex flex-col gap-2">
+            <span className="font-black text-lg tracking-wide" style={{ color: "var(--gold)" }}>{s.titulo}</span>
+            <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>{s.desc}</p>
             {s.detalle && (
-              <p className="text-xs font-medium text-neutral-500 mt-1">{s.detalle}</p>
+              <p className="text-xs font-bold mt-1" style={{ color: "#7d7065" }}>{s.detalle}</p>
             )}
           </div>
         ))}
 
         <a
           href="mailto:contactobazzichicken@gmail.com"
-          className="w-full text-center rounded-xl py-4 text-sm font-semibold tracking-widest uppercase mt-2 transition-opacity hover:opacity-85"
-          style={{ background: "var(--gold)", color: "#0a0a0a" }}
+          className="w-full text-center rounded-2xl py-4 text-sm font-black tracking-widest uppercase mt-2 transition-all hover:brightness-110 warm-button"
         >
           Solicita tu cotización
         </a>
 
-        <p className="text-center text-xs mt-0" style={{ color: "#a3a3a3" }}>contactobazzichicken@gmail.com</p>
-
+        <p className="text-center text-xs mt-0" style={{ color: "var(--muted)" }}>contactobazzichicken@gmail.com</p>
       </div>
     </div>
   )
