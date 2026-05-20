@@ -1,21 +1,27 @@
 import { useState, useEffect, useRef } from "react"
 import logo from "../assets/LOGGO_BAZZI_CHICKEN.png"
-import foto1 from "../assets/foto_inicio1.jpg"
-import foto2 from "../assets/foto_inicio2.jpg"
-import foto3 from "../assets/foto_inicio3.jpg"
+import foto1 from "../assets/foto_inicio3.jpg"
 
-const fotos = [foto1, foto2, foto3]
+const slides = [
+  {
+    type: "video",
+    src: "https://gnenxuwzljdguzftflov.supabase.co/storage/v1/object/public/productos/video_inicio.mp4",
+    alt: "Video de Bazzi Chicken",
+    duration: 10000
+  },
+  { type: "image", src: foto1, alt: "Foto de Bazzi Chicken", duration: 3000 }
+]
 
 export default function Inicio({ onVerMenu, onEspecial }) {
   const [fotoActual, setFotoActual] = useState(0)
   const touchStartX = useRef(null)
 
   useEffect(() => {
-    const intervalo = setInterval(() => {
-      setFotoActual((prev) => (prev + 1) % fotos.length)
-    }, 3000)
-    return () => clearInterval(intervalo)
-  }, [])
+    const intervalo = setTimeout(() => {
+      setFotoActual((prev) => (prev + 1) % slides.length)
+    }, slides[fotoActual].duration)
+    return () => clearTimeout(intervalo)
+  }, [fotoActual])
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX
@@ -24,8 +30,8 @@ export default function Inicio({ onVerMenu, onEspecial }) {
   const handleTouchEnd = (e) => {
     if (touchStartX.current === null) return
     const diff = touchStartX.current - e.changedTouches[0].clientX
-    if (diff > 50) setFotoActual((prev) => (prev + 1) % fotos.length)
-    if (diff < -50) setFotoActual((prev) => (prev - 1 + fotos.length) % fotos.length)
+    if (diff > 50) setFotoActual((prev) => (prev + 1) % slides.length)
+    if (diff < -50) setFotoActual((prev) => (prev - 1 + slides.length) % slides.length)
     touchStartX.current = null
   }
 
@@ -59,13 +65,26 @@ export default function Inicio({ onVerMenu, onEspecial }) {
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {fotos.map((foto, i) => (
+        {slides.map((slide, i) => (
           <div
             key={i}
             className="absolute inset-0 transition-opacity duration-700"
             style={{ opacity: i === fotoActual ? 1 : 0 }}
           >
-            <img src={foto} alt={`Foto ${i + 1}`} className="w-full h-full object-cover" />
+            {slide.type === "video" ? (
+              <video
+                src={slide.src}
+                className="w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label={slide.alt}
+              />
+            ) : (
+              <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" />
+            )}
           </div>
         ))}
 
@@ -80,7 +99,7 @@ export default function Inicio({ onVerMenu, onEspecial }) {
         </div>
 
         <div className="absolute top-4 right-4 flex gap-2">
-          {fotos.map((_, i) => (
+          {slides.map((_, i) => (
             <div
               key={i}
               className="h-2 rounded-full transition-all"
