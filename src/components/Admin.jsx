@@ -1,5 +1,25 @@
 import { useState, useEffect } from "react"
 import { supabase } from "../supabase"
+import { cleanDecisiones, hasConfiguredDecisions } from "../utils/productDecisions"
+
+const emptyDecision = () => ({
+  titulo: "",
+  tipo: "multiple",
+  max: 1,
+  requerido: false,
+  opciones: [{ nombre: "", precio: "", precioFinal: "" }]
+})
+
+const normalizeFormDecisiones = (value) => {
+  if (Array.isArray(value)) return value
+  if (!value) return []
+  try {
+    const parsed = typeof value === "string" ? JSON.parse(value) : value
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
+}
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState("")
@@ -61,7 +81,7 @@ function Panel() {
   const [loading, setLoading] = useState(true)
   const [editando, setEditando] = useState(null)
   const [nuevo, setNuevo] = useState(false)
-  const [form, setForm] = useState({ nombre: "", descripcion: "", precio: "", categoria: "", tags: "", disponible: true, orden: 0 })
+  const [form, setForm] = useState({ nombre: "", descripcion: "", precio: "", categoria: "", tags: "", disponible: true, orden: 0, imagen_url: "", stock: "", decisiones: [] })
   const [subiendo, setSubiendo] = useState(false)
 
   const fetchProductos = async () => {
@@ -70,6 +90,7 @@ function Panel() {
     setLoading(false)
   }
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { fetchProductos() }, [])
 
   const handleLogout = async () => {
@@ -80,17 +101,20 @@ function Panel() {
   const handleGuardar = async () => {
   const dataToSave = {
     ...form,
-    stock: form.stock === "" ? null : Number(form.stock)
+    stock: form.stock === "" ? null : Number(form.stock),
+    decisiones: cleanDecisiones(form.decisiones)
   }
   
   if (editando) {
-    await supabase.from("productos").update(dataToSave).eq("id", editando)
+    const { error } = await supabase.from("productos").update(dataToSave).eq("id", editando)
+    if (error) { alert(`No se pudo guardar: ${error.message}`); return }
   } else {
-    await supabase.from("productos").insert(dataToSave)
+    const { error } = await supabase.from("productos").insert(dataToSave)
+    if (error) { alert(`No se pudo guardar: ${error.message}`); return }
   }
   setEditando(null)
   setNuevo(false)
-  setForm({ nombre: "", descripcion: "", precio: "", categoria: "", tags: "", disponible: true, orden: 0, imagen_url: "", stock: "" })
+  setForm({ nombre: "", descripcion: "", precio: "", categoria: "", tags: "", disponible: true, orden: 0, imagen_url: "", stock: "", decisiones: [] })
   fetchProductos()
 }
 
@@ -120,13 +144,61 @@ function Panel() {
   const abrirEditar = (p) => {
     setEditando(p.id)
     setNuevo(false)
-    setForm({ nombre: p.nombre, descripcion: p.descripcion, precio: p.precio, categoria: p.categoria, tags: p.tags || "", disponible: p.disponible, orden: p.orden || 0, imagen_url: p.imagen_url || "", stock: p.stock || ""})
+    setForm({ nombre: p.nombre, descripcion: p.descripcion, precio: p.precio, categoria: p.categoria, tags: p.tags || "", disponible: p.disponible, orden: p.orden || 0, imagen_url: p.imagen_url || "", stock: p.stock || "", decisiones: normalizeFormDecisiones(p.decisiones)})
   }
 
   const abrirNuevo = () => {
     setNuevo(true)
     setEditando(null)
-    setForm({ nombre: "", descripcion: "", precio: "", categoria: "", tags: "", disponible: true, orden: 0, imagen_url: "", stock: "" })
+    setForm({ nombre: "", descripcion: "", precio: "", categoria: "", tags: "", disponible: true, orden: 0, imagen_url: "", stock: "", decisiones: [] })
+  }
+
+  const updateDecision = (index, key, value) => {
+    setForm((prev) => ({
+      ...prev,
+      decisiones: prev.decisiones.map((decision, i) => i === index ? { ...decision, [key]: value } : decision)
+    }))
+  }
+
+  const updateDecisionOption = (decisionIndex, optionIndex, key, value) => {
+    setForm((prev) => ({
+      ...prev,
+      decisiones: prev.decisiones.map((decision, i) => {
+        if (i !== decisionIndex) return decision
+        return {
+          ...decision,
+          opciones: decision.opciones.map((option, j) => j === optionIndex ? { ...option, [key]: value } : option)
+        }
+      })
+    }))
+  }
+
+  const addDecision = () => {
+    setForm((prev) => ({ ...prev, decisiones: [...prev.decisiones, emptyDecision()] }))
+  }
+
+  const removeDecision = (index) => {
+    setForm((prev) => ({ ...prev, decisiones: prev.decisiones.filter((_, i) => i !== index) }))
+  }
+
+  const addDecisionOption = (decisionIndex) => {
+    setForm((prev) => ({
+      ...prev,
+      decisiones: prev.decisiones.map((decision, i) => i === decisionIndex
+        ? { ...decision, opciones: [...decision.opciones, { nombre: "", precio: "", precioFinal: "" }] }
+        : decision
+      )
+    }))
+  }
+
+  const removeDecisionOption = (decisionIndex, optionIndex) => {
+    setForm((prev) => ({
+      ...prev,
+      decisiones: prev.decisiones.map((decision, i) => i === decisionIndex
+        ? { ...decision, opciones: decision.opciones.filter((_, j) => j !== optionIndex) }
+        : decision
+      )
+    }))
   }
 
   if (loading) return <div className="min-h-screen flex items-center justify-center" style={{ background: "#0a0a0a" }}><span className="text-neutral-500 text-sm">Cargando...</span></div>
@@ -178,6 +250,124 @@ function Panel() {
           </button>
         </div>
 
+        <div className="border rounded-2xl p-4 mt-2" style={{ borderColor: "#2a2a2a", background: "#0f0f0f" }}>
+          <div className="flex items-center justify-between gap-3 mb-3">
+            <div>
+              <label className="text-xs tracking-widest text-neutral-400 uppercase">Decisiones</label>
+              <p className="text-xs text-neutral-500 mt-1">Opciones que aparecen al tocar + en el menu.</p>
+            </div>
+            <button
+              onClick={addDecision}
+              className="text-xs border rounded-full px-3 py-1.5 flex-shrink-0"
+              style={{ borderColor: "var(--gold)", color: "var(--gold)" }}
+            >
+              + Grupo
+            </button>
+          </div>
+
+          {form.decisiones.length === 0 ? (
+            <p className="text-xs text-neutral-500">Sin decisiones configuradas.</p>
+          ) : (
+            <div className="flex flex-col gap-4">
+              {form.decisiones.map((decision, decisionIndex) => (
+                <div key={decisionIndex} className="border rounded-xl p-3" style={{ borderColor: "#2a2a2a", background: "#111111" }}>
+                  <div className="flex justify-between gap-2 mb-3">
+                    <input
+                      type="text"
+                      placeholder="Titulo del grupo"
+                      value={decision.titulo}
+                      onChange={(e) => updateDecision(decisionIndex, "titulo", e.target.value)}
+                      className="min-w-0 flex-1 rounded-xl px-3 py-2 text-xs text-white outline-none border"
+                      style={{ background: "#0a0a0a", borderColor: "#2a2a2a" }}
+                    />
+                    <button
+                      onClick={() => removeDecision(decisionIndex)}
+                      className="text-xs border rounded-full px-3"
+                      style={{ borderColor: "#7f1d1d", color: "#f87171" }}
+                    >
+                      Quitar
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 mb-3">
+                    <button
+                      onClick={() => updateDecision(decisionIndex, "tipo", decision.tipo === "single" ? "multiple" : "single")}
+                      className="rounded-xl min-h-10 text-xs border"
+                      style={{ borderColor: "#404040", color: "#d4d4d4" }}
+                    >
+                      {decision.tipo === "single" ? "Una opcion" : "Varias opciones"}
+                    </button>
+                    <input
+                      type="number"
+                      min="1"
+                      disabled={decision.tipo === "single"}
+                      placeholder="Max"
+                      value={decision.tipo === "single" ? 1 : decision.max}
+                      onChange={(e) => updateDecision(decisionIndex, "max", e.target.value)}
+                      className="rounded-xl px-3 py-2 text-xs text-white outline-none border disabled:opacity-40"
+                      style={{ background: "#0a0a0a", borderColor: "#2a2a2a" }}
+                    />
+                  </div>
+
+                  <button
+                    onClick={() => updateDecision(decisionIndex, "requerido", !decision.requerido)}
+                    className="rounded-full px-3 py-1.5 text-xs border mb-3"
+                    style={decision.requerido ? { background: "var(--gold)", color: "#0a0a0a", borderColor: "var(--gold)" } : { borderColor: "#404040", color: "#a3a3a3" }}
+                  >
+                    {decision.requerido ? "Obligatorio" : "Opcional"}
+                  </button>
+
+                  <div className="flex flex-col gap-2">
+                    {decision.opciones.map((option, optionIndex) => (
+                      <div key={optionIndex} className="grid grid-cols-[1fr_78px_78px_auto] gap-2 items-center">
+                        <input
+                          type="text"
+                          placeholder="Opcion"
+                          value={option.nombre}
+                          onChange={(e) => updateDecisionOption(decisionIndex, optionIndex, "nombre", e.target.value)}
+                          className="min-w-0 rounded-xl px-3 py-2 text-xs text-white outline-none border"
+                          style={{ background: "#0a0a0a", borderColor: "#2a2a2a" }}
+                        />
+                        <input
+                          type="number"
+                          placeholder="+$"
+                          value={option.precio}
+                          onChange={(e) => updateDecisionOption(decisionIndex, optionIndex, "precio", e.target.value)}
+                          className="min-w-0 rounded-xl px-2 py-2 text-xs text-white outline-none border"
+                          style={{ background: "#0a0a0a", borderColor: "#2a2a2a" }}
+                        />
+                        <input
+                          type="number"
+                          placeholder="Final"
+                          value={option.precioFinal}
+                          onChange={(e) => updateDecisionOption(decisionIndex, optionIndex, "precioFinal", e.target.value)}
+                          className="min-w-0 rounded-xl px-2 py-2 text-xs text-white outline-none border"
+                          style={{ background: "#0a0a0a", borderColor: "#2a2a2a" }}
+                        />
+                        <button
+                          onClick={() => removeDecisionOption(decisionIndex, optionIndex)}
+                          className="w-8 h-8 rounded-full border text-xs"
+                          style={{ borderColor: "#7f1d1d", color: "#f87171" }}
+                        >
+                          -
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => addDecisionOption(decisionIndex)}
+                    className="w-full rounded-xl border py-2 text-xs mt-2"
+                    style={{ borderColor: "#404040", color: "#a3a3a3" }}
+                  >
+                    + Agregar opcion
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
         <button
           onClick={handleGuardar}
           className="w-full rounded-xl py-3.5 text-sm font-semibold tracking-wide mt-2 transition-opacity hover:opacity-85"
@@ -210,6 +400,9 @@ function Panel() {
             </div>
             <p className="text-xs text-neutral-500 mb-1">{p.categoria}</p>
             <p className="text-sm font-medium mb-3" style={{ color: "var(--gold)" }}>${Number(p.precio).toLocaleString("es-CL")}</p>
+            {hasConfiguredDecisions(p) && (
+              <p className="text-xs mb-3" style={{ color: "var(--gold)" }}>Con decisiones configuradas</p>
+            )}
             <div className="flex gap-2">
               <button onClick={() => abrirEditar(p)} className="text-xs border rounded-full px-3 py-1.5 flex-1" style={{ borderColor: "#404040", color: "#a3a3a3" }}>Editar</button>
               <button onClick={() => handleToggle(p.id, p.disponible)} className="text-xs border rounded-full px-3 py-1.5 flex-1" style={{ borderColor: "#404040", color: "#a3a3a3" }}>{p.disponible ? "Desactivar" : "Activar"}</button>

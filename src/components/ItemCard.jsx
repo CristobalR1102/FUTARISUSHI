@@ -1,67 +1,62 @@
 import { useState } from "react"
-
-const AGREGADOS = ["Arroz", "Papas fritas", "Ensalada"]
-const SALCHIPAPA_VARIANTES = [
-  { id: "sola", label: "Salchipapa sola", detail: "Precio normal", price: null },
-  { id: "mini-fruna", label: "Con Mini Fruna", detail: "$4.000", price: 4000 },
-  { id: "bebida-lata", label: "Con bebida lata", detail: "$4.800", price: 4800 }
-]
+import { getProductDecisions } from "../utils/productDecisions"
 
 export default function ItemCard({ item, qty, onAdd, onRemove }) {
   const [expanded, setExpanded] = useState(true)
-  const [showAgregados, setShowAgregados] = useState(false)
-  const [showSalchipapas, setShowSalchipapas] = useState(false)
-  const [seleccionados, setSeleccionados] = useState([])
-  const [bebidaLata, setBebidaLata] = useState(false)
+  const [showDecisiones, setShowDecisiones] = useState(false)
+  const [seleccionados, setSeleccionados] = useState({})
 
   const fmt = (n) => "$" + Number(n).toLocaleString("es-CL")
   const nombre = item.nombre || item.name
   const descripcion = item.descripcion || item.desc
   const precio = item.precio || item.price
   const tags = item.tags ? item.tags.split(",").map(t => t.trim()) : []
-  const esColacion = item.categoria === "Colaciones"
-  const esSalchipapa = nombre?.toLowerCase().includes("salchipapa")
+  const decisiones = getProductDecisions(item)
 
-  const toggleAgregado = (a) => {
-    if (seleccionados.includes(a)) {
-      setSeleccionados(seleccionados.filter(s => s !== a))
-    } else {
-      if (seleccionados.length >= 2) return
-      setSeleccionados([...seleccionados, a])
-    }
+  const isSelected = (decision, option) => (seleccionados[decision.id] || []).includes(option.id)
+
+  const toggleDecision = (decision, option) => {
+    setSeleccionados((prev) => {
+      const actuales = prev[decision.id] || []
+      if (decision.tipo === "single") return { ...prev, [decision.id]: [option.id] }
+      if (actuales.includes(option.id)) return { ...prev, [decision.id]: actuales.filter((id) => id !== option.id) }
+      if (actuales.length >= decision.max) return prev
+      return { ...prev, [decision.id]: [...actuales, option.id] }
+    })
   }
 
-  const confirmarAgregados = () => {
-    const agregados = bebidaLata ? [...seleccionados, "Bebida lata"] : seleccionados
-    const precioFinal = Number(precio) + (bebidaLata ? 1200 : 0)
-    const cartKey = `${item.id}:${agregados.join("|") || "sin-agregados"}`
-    const itemConAgregados = { ...item, precio: precioFinal, price: precioFinal, agregados, cartKey }
-    onAdd(itemConAgregados)
-    setShowAgregados(false)
-    setSeleccionados([])
-    setBebidaLata(false)
+  const getSelectedOptions = () => decisiones.flatMap((decision) => {
+    const selectedIds = seleccionados[decision.id] || []
+    return decision.opciones
+      .filter((option) => selectedIds.includes(option.id))
+      .map((option) => ({ ...option, decisionId: decision.id }))
+  })
+
+  const canConfirm = decisiones.every((decision) => !decision.requerido || (seleccionados[decision.id] || []).length > 0)
+
+  const confirmarDecisiones = () => {
+    if (!canConfirm) return
+    const opciones = getSelectedOptions()
+    const precioFinal = opciones.reduce((total, option) => (
+      option.precioFinal !== null ? Number(option.precioFinal) : total + Number(option.precio || 0)
+    ), Number(precio))
+    const agregados = opciones.map((option) => option.cartLabel || option.nombre)
+    const cartKey = `${item.id}:${opciones.map((option) => `${option.decisionId}-${option.id}`).join("|") || "sin-decisiones"}`
+    onAdd({ ...item, precio: precioFinal, price: precioFinal, agregados, cartKey })
+    setShowDecisiones(false)
+    setSeleccionados({})
   }
 
-  const confirmarSalchipapa = (variante) => {
-    const precioFinal = variante.price || Number(precio)
-    const agregados = [variante.label]
-    const itemConVariante = {
-      ...item,
-      precio: precioFinal,
-      price: precioFinal,
-      agregados,
-      cartKey: `${item.id}:${variante.id}`
-    }
-    onAdd(itemConVariante)
-    setShowSalchipapas(false)
+  const getOptionDetail = (option) => {
+    if (option.precioFinal !== null) return fmt(option.precioFinal)
+    if (option.precio > 0) return `+${fmt(option.precio)}`
+    return ""
   }
 
   const handleAdd = (e) => {
     e.stopPropagation()
-    if (esColacion) {
-      setShowAgregados(true)
-    } else if (esSalchipapa) {
-      setShowSalchipapas(true)
+    if (decisiones.length > 0) {
+      setShowDecisiones(true)
     } else {
       onAdd(item)
     }
@@ -127,47 +122,42 @@ export default function ItemCard({ item, qty, onAdd, onRemove }) {
         </div>
       </div>
 
-      {showAgregados && (
+      {showDecisiones && (
         <div className="border-t px-4 py-4" style={{ borderColor: "var(--line)", background: "rgba(8, 5, 4, 0.78)" }}>
-          <p className="text-xs text-white mb-3 font-bold tracking-wide">Elige hasta 2 agregados</p>
-          <div className="flex flex-col gap-2 mb-4">
-            {AGREGADOS.map((a) => (
-              <button
-                key={a}
-                onClick={() => toggleAgregado(a)}
-                className="w-full text-left px-4 py-3 rounded-xl text-sm border transition-all"
-                style={
-                  seleccionados.includes(a)
-                    ? { background: "var(--gold)", color: "#140803", borderColor: "var(--gold)", fontWeight: 800 }
-                    : { background: "rgba(255,255,255,0.04)", borderColor: "var(--line)", color: "var(--paper)" }
-                }
-              >
-                {a}
-              </button>
-            ))}
-            <button
-              onClick={() => setBebidaLata(!bebidaLata)}
-              className="w-full text-left px-4 py-3 rounded-xl text-sm border transition-all"
-              style={
-                bebidaLata
-                  ? { background: "var(--gold)", color: "#140803", borderColor: "var(--gold)", fontWeight: 800 }
-                  : { background: "rgba(255,255,255,0.04)", borderColor: "var(--line)", color: "var(--paper)" }
-              }
-            >
-              Agregar bebida lata +$1.200
-            </button>
-          </div>
+          {decisiones.map((decision) => (
+            <div key={decision.id} className="mb-4 last:mb-4">
+              <p className="text-xs text-white mb-3 font-bold tracking-wide">{decision.titulo}</p>
+              <div className="flex flex-col gap-2">
+                {decision.opciones.map((option) => (
+                  <button
+                    key={option.id}
+                    onClick={() => toggleDecision(decision, option)}
+                    className="w-full flex justify-between gap-3 text-left px-4 py-3 rounded-xl text-sm border transition-all"
+                    style={
+                      isSelected(decision, option)
+                        ? { background: "var(--gold)", color: "#140803", borderColor: "var(--gold)", fontWeight: 800 }
+                        : { background: "rgba(255,255,255,0.04)", borderColor: "var(--line)", color: "var(--paper)" }
+                    }
+                  >
+                    <span>{option.nombre}</span>
+                    {getOptionDetail(option) && <span>{getOptionDetail(option)}</span>}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
           <div className="flex gap-2">
             <button
-              onClick={() => { setShowAgregados(false); setSeleccionados([]); setBebidaLata(false) }}
+              onClick={() => { setShowDecisiones(false); setSeleccionados({}) }}
               className="flex-1 py-3 rounded-xl text-sm border"
               style={{ borderColor: "var(--line)", color: "var(--muted)" }}
             >
               Cancelar
             </button>
             <button
-              onClick={confirmarAgregados}
-              className="flex-1 py-3 rounded-xl text-sm font-black transition-all hover:brightness-110 warm-button"
+              onClick={confirmarDecisiones}
+              disabled={!canConfirm}
+              className="flex-1 py-3 rounded-xl text-sm font-black transition-all hover:brightness-110 disabled:opacity-40 warm-button"
             >
               Agregar
             </button>
@@ -175,33 +165,7 @@ export default function ItemCard({ item, qty, onAdd, onRemove }) {
         </div>
       )}
 
-      {showSalchipapas && (
-        <div className="border-t px-4 py-4" style={{ borderColor: "var(--line)", background: "rgba(8, 5, 4, 0.78)" }}>
-          <p className="text-xs text-white mb-3 font-bold tracking-wide">Elige una opcion</p>
-          <div className="flex flex-col gap-2 mb-4">
-            {SALCHIPAPA_VARIANTES.map((variante) => (
-              <button
-                key={variante.id}
-                onClick={() => confirmarSalchipapa(variante)}
-                className="w-full flex justify-between gap-3 text-left px-4 py-3 rounded-xl text-sm border transition-all hover:bg-white/10"
-                style={{ background: "rgba(255,255,255,0.04)", borderColor: "var(--line)", color: "var(--paper)" }}
-              >
-                <span className="font-bold">{variante.label}</span>
-                <span style={{ color: "var(--gold)" }}>{variante.detail}</span>
-              </button>
-            ))}
-          </div>
-          <button
-            onClick={() => setShowSalchipapas(false)}
-            className="w-full py-3 rounded-xl text-sm border"
-            style={{ borderColor: "var(--line)", color: "var(--muted)" }}
-          >
-            Cancelar
-          </button>
-        </div>
-      )}
-
-      {expanded && !showAgregados && !showSalchipapas && (
+      {expanded && !showDecisiones && (
         <div className="border-t" style={{ borderColor: "var(--line)" }}>
           {item.imagen_url ? (
             <img
