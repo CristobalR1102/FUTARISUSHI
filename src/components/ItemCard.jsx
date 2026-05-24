@@ -5,6 +5,7 @@ export default function ItemCard({ item, qty, onAdd, onRemove }) {
   const [expanded, setExpanded] = useState(true)
   const [showDecisiones, setShowDecisiones] = useState(false)
   const [seleccionados, setSeleccionados] = useState({})
+  const [fotoExpandida, setFotoExpandida] = useState(false)
 
   const fmt = (n) => "$" + Number(n).toLocaleString("es-CL")
   const nombre = item.nombre || item.name
@@ -167,14 +168,39 @@ export default function ItemCard({ item, qty, onAdd, onRemove }) {
 
       {expanded && !showDecisiones && (
         <div className="border-t" style={{ borderColor: "var(--line)" }}>
-          {item.imagen_url ? (
-            <img
-              src={item.imagen_url}
-              alt={nombre}
-              className="w-full object-cover"
-              style={{ maxHeight: "220px" }}
-            />
-          ) : null}
+          {item.imagen_url && (
+            <div className="relative">
+              <img
+                src={item.imagen_url}
+                alt={nombre}
+                className="w-full object-cover"
+                style={{ maxHeight: "220px" }}
+              />
+              <button
+                onClick={(e) => { e.stopPropagation(); setFotoExpandida(true) }}
+                className="absolute bottom-2 right-2 text-xs px-3 py-1.5 rounded-full font-medium"
+                style={{ background: "rgba(0,0,0,0.6)", color: "#ffffff" }}
+              >
+                Ver foto
+              </button>
+            </div>
+          )}
+
+          {fotoExpandida && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center"
+              style={{ background: "rgba(0,0,0,0.9)" }}
+              onClick={() => setFotoExpandida(false)}
+            >
+              <img src={item.imagen_url} alt={nombre} className="max-w-full max-h-full object-contain p-4" />
+              <button
+                className="absolute top-4 right-4 text-white text-2xl font-bold"
+                onClick={() => setFotoExpandida(false)}
+              >
+                ×
+              </button>
+            </div>
+          )}
           <p className="text-sm leading-relaxed p-4" style={{ color: "var(--muted)" }}>{descripcion}</p>
         </div>
       )}
