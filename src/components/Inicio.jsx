@@ -80,8 +80,9 @@ export default function Inicio({ onVerMenu, onEspecial }) {
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="auto"
                 aria-label={slide.alt}
+                onClick={(e) => e.target.play()}
               />
             ) : (
               <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" />
