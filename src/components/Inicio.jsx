@@ -42,7 +42,7 @@ export default function Inicio({ onVerMenu, onEspecial }) {
 
   const abierto = (() => {
     if (dia === 1) return false
-    return minutos >= 780 && minutos < 1320
+    return minutos >= 720 && minutos < 1110
   })()
 
   return (
