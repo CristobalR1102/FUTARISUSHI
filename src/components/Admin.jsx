@@ -77,6 +77,7 @@ function Login({ onLogin }) {
 }
 
 function Panel() {
+  const [busqueda, setBusqueda] = useState("")
   const [productos, setProductos] = useState([])
   const [loading, setLoading] = useState(true)
   const [editando, setEditando] = useState(null)
@@ -381,7 +382,7 @@ function Panel() {
 
   return (
     <div className="min-h-screen max-w-md mx-auto px-5 py-6" style={{ background: "#0a0a0a" }}>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-4">
         <span className="font-black text-xl tracking-widest" style={{ color: "var(--gold)" }}>Productos</span>
         <div className="flex gap-2">
           <button onClick={abrirNuevo} className="text-xs border rounded-full px-3 py-1.5" style={{ borderColor: "var(--gold)", color: "var(--gold)" }}>+ Nuevo</button>
@@ -389,8 +390,17 @@ function Panel() {
         </div>
       </div>
 
+      <input
+        type="text"
+        placeholder="Buscar producto..."
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
+        className="w-full rounded-xl px-4 py-3 text-sm text-white outline-none border mb-4"
+        style={{ background: "#111111", borderColor: "#2a2a2a" }}
+      />
+
       <div className="flex flex-col gap-3">
-        {productos.map((p) => (
+        {productos.filter(p => p.nombre.toLowerCase().includes(busqueda.toLowerCase())).map((p) => (
           <div key={p.id} className="border rounded-xl p-4" style={{ background: "#111111", borderColor: "#2a2a2a" }}>
             <div className="flex justify-between items-start gap-2 mb-1">
               <span className="text-sm font-medium text-white">{p.nombre}</span>
