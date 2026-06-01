@@ -148,7 +148,7 @@ export default function Inicio({ onVerMenu, onEspecial }) {
           SERVICIOS ESPECIALES
         </button>
         <a
-          href="https://www.instagram.com/futarisushi/"
+          href="https://www.instagram.com/futari_sushi.maipu/"
           target="_blank"
           rel="noreferrer"
           className="w-full rounded-2xl py-4 font-black text-sm tracking-widest transition-colors border flex items-center justify-center gap-2"
