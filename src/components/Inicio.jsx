@@ -72,10 +72,14 @@ export default function Inicio({ onVerMenu, onEspecial }) {
           <img src={logo} alt="FUTARI SUSHI" className="w-24 h-24 object-contain drop-shadow-[0_12px_28px_rgba(210,42,55,0.24)]" />
           <div className="min-w-0">
             <p className="text-xs tracking-[0.22em] uppercase" style={{ color: "var(--muted)" }}>Maipú</p>
-            <h1 className="font-black text-4xl tracking-[0.08em] leading-none mt-1" style={{ color: "var(--gold)" }}>
+            <h1 className="font-black text-4xl tracking-[0.08em] leading-none mt-1" 
+                style={{ color: "var(--gold)", fontFamily: "'Noto Serif JP', serif" }}>
               FUTARI
             </h1>
-            <p className="font-black text-xl tracking-[0.12em] leading-none text-white">SUSHI</p>
+            <p className="font-black text-xl tracking-[0.12em] leading-none text-white"
+              style={{ fontFamily: "'Noto Serif JP', serif" }}>
+              SUSHI
+            </p>
           </div>
         </div>
       </section>
@@ -122,7 +126,7 @@ export default function Inicio({ onVerMenu, onEspecial }) {
       </div>
 
       <div className="mx-4 max-w-md sm:mx-auto mt-4 glass-panel rounded-2xl p-4">
-        <p className="text-sm text-center font-semibold text-white">Av. El Descanso 1400, Local 14, Maipú</p>
+        <p className="text-sm text-center font-semibold text-white">Av. El Descanso 1208, Maipú</p>
         <p className="text-xs text-center mt-1" style={{ color: "var(--muted)" }}>Martes a Domingo · 12:00 - 18:30 · Lunes cerrado</p>
       </div>
 
