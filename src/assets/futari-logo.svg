@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">FUTARI SUSHI</title>
+  <desc id="desc">Logo circular con piezas de sushi y palillos.</desc>
+  <defs>
+    <linearGradient id="plate" x1="35" y1="24" x2="205" y2="214" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f6f1e8"/>
+      <stop offset="0.52" stop-color="#f4d8b8"/>
+      <stop offset="1" stop-color="#a9222b"/>
+    </linearGradient>
+    <linearGradient id="nori" x1="71" y1="72" x2="168" y2="166" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#10251d"/>
+      <stop offset="1" stop-color="#06120e"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity=".32"/>
+    </filter>
+  </defs>
+  <circle cx="120" cy="120" r="108" fill="#080c0b"/>
+  <circle cx="120" cy="120" r="96" fill="url(#plate)" filter="url(#shadow)"/>
+  <circle cx="120" cy="120" r="74" fill="#fff8ef"/>
+  <g transform="rotate(-32 120 120)">
+    <rect x="52" y="105" width="140" height="9" rx="4.5" fill="#7b3e24"/>
+    <rect x="48" y="125" width="148" height="9" rx="4.5" fill="#9b5631"/>
+  </g>
+  <g filter="url(#shadow)">
+    <circle cx="92" cy="126" r="35" fill="url(#nori)"/>
+    <circle cx="92" cy="126" r="25" fill="#fff8ef"/>
+    <circle cx="92" cy="126" r="15" fill="#f36f3f"/>
+    <circle cx="99" cy="119" r="7" fill="#79b15c"/>
+    <circle cx="84" cy="133" r="6" fill="#f2c84b"/>
+    <circle cx="150" cy="118" r="36" fill="url(#nori)"/>
+    <circle cx="150" cy="118" r="26" fill="#fff8ef"/>
+    <path d="M132 117c10-18 26-21 40-7-8 19-25 24-40 7Z" fill="#ee4b55"/>
+    <circle cx="154" cy="126" r="7" fill="#79b15c"/>
+  </g>
+  <path d="M58 185c31 21 90 24 124-1" fill="none" stroke="#080c0b" stroke-width="9" stroke-linecap="round" opacity=".82"/>
+  <text x="120" y="206" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="700" letter-spacing="4" fill="#fff8ef">FUTARI</text>
+</svg>

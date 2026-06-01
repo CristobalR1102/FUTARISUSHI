@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1400" role="img" aria-labelledby="title desc">
+  <title id="title">Tabla de sushi Futari</title>
+  <desc id="desc">Tabla oscura con rolls, nigiri y palillos.</desc>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="35%" r="65%">
+      <stop offset="0" stop-color="#f7d8b0" stop-opacity=".36"/>
+      <stop offset=".5" stop-color="#8b1e2d" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#050807"/>
+    </radialGradient>
+    <linearGradient id="wood" x1="0" x2="1">
+      <stop offset="0" stop-color="#17110d"/>
+      <stop offset=".55" stop-color="#302017"/>
+      <stop offset="1" stop-color="#0a0807"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000" flood-opacity=".45"/>
+    </filter>
+  </defs>
+  <rect width="900" height="1400" fill="url(#wood)"/>
+  <rect width="900" height="1400" fill="url(#glow)"/>
+  <g opacity=".18" stroke="#f8e7ca" stroke-width="2">
+    <path d="M0 180c140-42 276-38 420 6s292 48 480 0"/>
+    <path d="M0 420c120 34 246 28 374-18s302-58 526 12"/>
+    <path d="M0 960c164-48 310-34 466 22s296 54 434-12"/>
+  </g>
+  <ellipse cx="450" cy="760" rx="330" ry="520" fill="#111613" opacity=".82" filter="url(#shadow)"/>
+  <ellipse cx="450" cy="760" rx="294" ry="472" fill="#f6eee0"/>
+  <ellipse cx="450" cy="760" rx="258" ry="424" fill="#121a16"/>
+  <g filter="url(#shadow)">
+    <g transform="translate(244 430)">
+      <rect x="0" y="0" width="150" height="78" rx="32" fill="#fff5e8"/>
+      <path d="M8 36c44-34 92-38 134-3-18 30-92 54-134 3Z" fill="#f05f57"/>
+      <path d="M34 22c22 18 52 18 82 0" fill="none" stroke="#ffd0be" stroke-width="6" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(502 475)">
+      <rect x="0" y="0" width="148" height="78" rx="32" fill="#fff5e8"/>
+      <path d="M10 40c42-34 88-42 130-8-14 34-89 58-130 8Z" fill="#ff9d47"/>
+      <path d="M32 23c24 15 52 15 86 0" fill="none" stroke="#ffe4bc" stroke-width="6" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(246 630)">
+      <circle cx="63" cy="63" r="63" fill="#091711"/>
+      <circle cx="63" cy="63" r="45" fill="#fff5e8"/>
+      <circle cx="63" cy="63" r="24" fill="#ff8a45"/>
+      <circle cx="72" cy="54" r="11" fill="#79ad58"/>
+      <circle cx="52" cy="74" r="10" fill="#f1c84b"/>
+    </g>
+    <g transform="translate(390 610)">
+      <circle cx="70" cy="70" r="70" fill="#091711"/>
+      <circle cx="70" cy="70" r="50" fill="#fff5e8"/>
+      <path d="M45 72c24-39 62-42 88-10-19 41-60 50-88 10Z" fill="#e33f4f"/>
+      <circle cx="77" cy="78" r="12" fill="#79ad58"/>
+    </g>
+    <g transform="translate(560 665)">
+      <circle cx="62" cy="62" r="62" fill="#091711"/>
+      <circle cx="62" cy="62" r="43" fill="#fff5e8"/>
+      <circle cx="62" cy="62" r="23" fill="#f3c94b"/>
+      <circle cx="52" cy="52" r="10" fill="#f05f57"/>
+    </g>
+    <g transform="translate(318 845)">
+      <circle cx="64" cy="64" r="64" fill="#091711"/>
+      <circle cx="64" cy="64" r="45" fill="#fff5e8"/>
+      <circle cx="64" cy="64" r="23" fill="#77b663"/>
+      <circle cx="76" cy="54" r="10" fill="#e33f4f"/>
+    </g>
+    <g transform="translate(482 875)">
+      <circle cx="62" cy="62" r="62" fill="#091711"/>
+      <circle cx="62" cy="62" r="43" fill="#fff5e8"/>
+      <path d="M39 65c22-33 54-35 76-8-17 34-53 41-76 8Z" fill="#ff9d47"/>
+      <circle cx="68" cy="70" r="10" fill="#79ad58"/>
+    </g>
+  </g>
+  <g transform="rotate(-31 450 700)" opacity=".94">
+    <rect x="115" y="336" width="650" height="14" rx="7" fill="#7b3e24"/>
+    <rect x="105" y="384" width="670" height="14" rx="7" fill="#9b5631"/>
+  </g>
+</svg>

@@ -41,7 +41,7 @@ function Login({ onLogin }) {
 
   return (
     <div className="min-h-screen max-w-md mx-auto flex flex-col items-center justify-center px-6" style={{ background: "#0a0a0a" }}>
-      <div className="font-black text-3xl tracking-widest mb-1" style={{ color: "var(--gold)" }}>BAZZI</div>
+      <div className="font-black text-3xl tracking-widest mb-1" style={{ color: "var(--gold)" }}>FUTARI SUSHI</div>
       <div className="text-xs tracking-widest text-neutral-500 mb-10">PANEL DE ADMINISTRACIÓN</div>
 
       <div className="w-full flex flex-col gap-4">

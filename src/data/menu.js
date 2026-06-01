@@ -1,58 +1,121 @@
 export const menu = [
   {
-    category: "Promociones Familiares",
+    category: "Promociones",
     items: [
-      { id: 1, name: "Promo Familiar 1", desc: "Pollo entero, papas familiares, ensalada mixta y 2 salsas", price: 26000, tags: ["popular"] },
-      { id: 2, name: "Promo Familiar 2", desc: "Pollo entero, papas familiares, ensalada mixta, bebida 1.5L y 3 salsas", price: 29000, tags: ["popular"] },
-    ]
-  },
-  {
-    category: "Pollos",
-    items: [
-      { id: 3, name: "Pollo Entero", desc: "Pollo asado entero", price: 15500, tags: [] },
-      { id: 4, name: "Medio Pollo", desc: "Medio pollo asado", price: 9000, tags: [] },
-      { id: 5, name: "Promo Medio Pollo", desc: "Medio pollo con acompañamiento", price: 13900, tags: [] },
-    ]
-  },
-  {
-    category: "Colaciones",
-    items: [
-      { id: 6, name: "Colación con Tutro", desc: "Incluye máximo 2 agregados: arroz, papas fritas o ensalada", price: 6800, tags: [] },
-      { id: 7, name: "Colación Pechuga", desc: "Incluye máximo 2 agregados: arroz, papas fritas o ensalada", price: 7300, tags: [] },
-      { id: 8, name: "Colación Crispy", desc: "Filetes o tutro ala, incluye máximo 2 agregados", price: 6500, tags: [] },
-    ]
-  },
-  {
-    category: "Snacks",
-    items: [
-      { id: 9, name: "Papas Chicas", desc: "Porción chica de papas fritas", price: 2800, tags: [] },
-      { id: 10, name: "Papas Medianas", desc: "Porción mediana de papas fritas", price: 5500, tags: [] },
-      { id: 11, name: "Papas Familiares", desc: "Porción familiar de papas fritas", price: 8500, tags: [] },
-      { id: 12, name: "Salchipapas", desc: "Papas fritas con salchicha", price: 3500, tags: [] },
-      { id: 13, name: "Nuggets de Pollo", desc: "10 unidades de nuggets de pollo", price: 3400, tags: [] },
-      { id: 14, name: "Aros de Cebolla", desc: "10 unidades de aros de cebolla", price: 3200, tags: [] },
-      { id: 15, name: "Sopaipillas", desc: "3 unidades de sopaipillas", price: 1200, tags: [] },
-      { id: 16, name: "Salsa", desc: "Salsa a elección", price: 800, tags: [] },
-    ]
-  },
-  {
-    category: "Empanadas",
-    items: [
-      { id: 17, name: "Empanadas de Queso x3", desc: "3 empanadas de queso", price: 2800, tags: [] },
-      { id: 18, name: "Empanadas de Queso x5", desc: "5 empanadas de queso", price: 4500, tags: [] },
-    ]
-  },
-  {
-    category: "Bebidas",
-    items: [
-      { id: 19, name: "Bebida Lata 350ml", desc: "Lata de bebida 350ml", price: 1500, tags: [] },
-      { id: 20, name: "Jugo Caja Colación", desc: "Jugo en caja", price: 700, tags: [] },
-      { id: 21, name: "Mini Fruna", desc: "Mini Fruna", price: 600, tags: [] },
-      { id: 22, name: "Agua", desc: "Agua mineral", price: 1000, tags: [] },
-      { id: 23, name: "Bebida 1.5L", desc: "Bebida familiar 1.5 litros", price: 3000, tags: [] },
+      {
+        id: 1,
+        name: "18 Mixtas",
+        desc: "10 Pollo y Palta env. en Sésamo · 06 Queso y Palta env. en Nori · 02 Gyosas Mixtas Fritas",
+        price: 6500,
+        tags: []
+      },
+      {
+        id: 2,
+        name: "20 Mixtas",
+        desc: "10 Pollo y Queso env. en Palta · 10 Kanikama y Queso env. en Panko",
+        price: 8000,
+        tags: []
+      },
+      {
+        id: 3,
+        name: "24 Tradicionales",
+        desc: "08 Sashimi Mixto · 02 Nigiri's Camarón · 02 Nigiri's Kanikama · 06 Palta y Masago env. en Nori · 06 Pepino y Sésamo env. en Nori",
+        price: 12000,
+        tags: []
+      },
+      {
+        id: 4,
+        name: "28 Frías",
+        desc: "10 Camarón y Queso env. en Palta · 10 Kanikama y Palta env. en Sésamo · 06 Palmito env. en Nori · 02 Nigiri's de Salmón",
+        price: 9000,
+        tags: []
+      },
+      {
+        id: 5,
+        name: "30 Fritas",
+        desc: "10 Pollo y Queso env. en Panko · 10 Kanikama y Queso env. en Panko · 06 Camarón y Queso env. en Nori (Frito en Panko) · 04 Gyosas Mixtas",
+        price: 11000,
+        tags: []
+      },
+      {
+        id: 6,
+        name: "30 Veggies",
+        desc: "10 Choclo y Queso env. en Palta · 10 Palmito y Palta env. en Ciboulette · 10 Champiñón y Queso env. en Panko",
+        price: 11000,
+        tags: ["veg"]
+      },
+      {
+        id: 7,
+        name: "36 Mixtas",
+        desc: "10 Salmón y Queso env. en Palta · 10 Palmito y Palta env. en Ciboulette · 10 Kanikama y Queso env. en Panko · 06 Pollo env. en Nori",
+        price: 11000,
+        tags: ["popular"]
+      },
+      {
+        id: 8,
+        name: "40 Mixtas",
+        desc: "10 Camarón y Queso env. en Palta · 10 Palmito y Palta env. en Ciboulette · 10 Kanikama y Palta env. en Sésamo · 10 Pollo y Queso env. en Panko",
+        price: 14000,
+        tags: ["popular"]
+      },
+      {
+        id: 9,
+        name: "40 Fritas",
+        desc: "20 Pollo y Queso env. en Panko · 10 Camarón y Queso env. en Panko · 10 Kanikama y Queso env. en Panko",
+        price: 15000,
+        tags: []
+      },
+      {
+        id: 10,
+        name: "48 Mixtas",
+        desc: "10 Camarón y Queso env. en Salmón · 10 Kanikama y Palta env. en Sésamo · 10 Palmito y Palta env. en Ciboulette · 10 Pollo y Queso env. en Panko · 06 Masago y Palta env. en Nori · 02 Nigiri de Salmón",
+        price: 16000,
+        tags: []
+      },
+      {
+        id: 11,
+        name: "50 Veggies",
+        desc: "10 Choclo y Queso env. en Palta · 10 Pepino y Palta env. en Sésamo · 10 Palmito y Palta env. en Ciboulette · 10 Champiñón y Queso env. en Panko · 10 Pimentón y Queso env. en Panko",
+        price: 17000,
+        tags: ["veg"]
+      },
+      {
+        id: 12,
+        name: "50 Mixtas",
+        desc: "10 Pollo y Palta env. en Queso · 10 Camarón y Queso env. en Palta · 10 Palmito y Palta env. en Ciboulette · 10 Pollo y Queso env. en Panko · 10 Kanikama y Queso env. en Panko",
+        price: 17000,
+        tags: ["popular"]
+      },
+      {
+        id: 13,
+        name: "70 Mixtas",
+        desc: "10 Pollo y Queso env. en Palta · 10 Kanikama y Palta env. en Sésamo · 10 Palmito y Palta env. en Ciboulette · 10 Palta y Queso env. en Alga Nori · 10 Pollo y Queso env. en Panko · 10 Camarón y Queso env. en Panko · 10 Kanikama y Queso env. en Panko",
+        price: 20000,
+        tags: []
+      },
+      {
+        id: 14,
+        name: "70 Fritas",
+        desc: "20 Pollo y Queso env. en Panko · 20 Camarón y Queso env. en Panko · 10 Kanikama y Queso env. en Panko · 10 Salmón y Queso env. en Panko · 10 Champiñón y Queso env. en Panko",
+        price: 22000,
+        tags: []
+      },
+      {
+        id: 15,
+        name: "70 Tradicionales",
+        desc: "10 Camarón y Queso env. en Palta · 10 Salmón y Palta env. en Masago · 10 Kanikama y Palta env. en Sésamo · 10 Pollo y Queso env. en Panko · 10 Sashimi Mixto · 06 Palmito env. en Nori · 06 Masago y Palta env. en Nori · 04 Gyosas Mixtas · 04 Nigiri Mixto Salmón/Camarón",
+        price: 24000,
+        tags: []
+      },
+      {
+        id: 16,
+        name: "100 Mixtas",
+        desc: "10 Pollo y Queso env. en Palta · 10 Salmón y Palta env. en Queso · 10 Choclo env. en Alga Nori · 10 Pollo y Palta env. en Sésamo · 10 Palmito y Palta env. en Ciboulette · 10 Kanikama y Queso env. en Masago · 10 Pollo y Queso env. en Panko · 10 Camarón y Queso env. en Panko · 10 Kanikama y Queso env. en Panko · 05 Tiras de Pollo Apanado · 05 Gyosas Mixtas",
+        price: 30000,
+        tags: ["popular"]
+      }
     ]
   }
 ]
-
-export const WHATSAPP_NUMBER = "56974841485"
-
+ 
+export const WHATSAPP_NUMBER = "56XXXXXXXXX"

@@ -2,17 +2,17 @@ export default function Especial({ onBack }) {
   const servicios = [
   {
     titulo: "Pedidos para Eventos",
-    desc: "¿Tienes una celebración, reunión de empresa o evento familiar? Preparamos pedidos grandes de pollos asados y acompañamientos para que no te preocupes de cocinar.",
+    desc: "¿Tienes una celebración, reunión de empresa o evento familiar? Preparamos bandejas de sushi, rolls y acompañamientos para que no te preocupes de cocinar.",
     detalle: "Consultar disponibilidad y cantidad mínima."
   },
   {
     titulo: "Catering y Colaciones",
-    desc: "Ofrecemos servicio de colaciones para empresas y grupos de trabajo. Menú variado con pollos, ensaladas, papas fritas y bebidas.",
+    desc: "Ofrecemos servicio de colaciones para empresas y grupos de trabajo. Menú variado con rolls, piezas calientes, gyosas, bebidas y opciones vegetarianas.",
     detalle: "Coordinar con anticipación."
   },
   {
     titulo: "Pedidos al por Mayor",
-    desc: "Venta de pollos asados y acompañamientos en grandes cantidades para eventos, juntas de vecinos, celebraciones y más.",
+    desc: "Venta de tablas y promociones de sushi en grandes cantidades para eventos, juntas de vecinos, celebraciones y más.",
     detalle: null
   }
 ]
@@ -33,7 +33,7 @@ export default function Especial({ onBack }) {
       <div className="px-4 pt-5 flex flex-col gap-4">
         <div>
           <p className="text-xs tracking-[0.22em] uppercase" style={{ color: "var(--muted)" }}>Para grupos</p>
-          <h1 className="text-3xl font-black leading-tight text-white">Bazzi para eventos y empresas</h1>
+          <h1 className="text-3xl font-black leading-tight text-white">FUTARI SUSHI para eventos y empresas</h1>
         </div>
 
         {servicios.map((s) => (
@@ -47,13 +47,13 @@ export default function Especial({ onBack }) {
         ))}
 
         <a
-          href="mailto:bazzichicken@gmail.com"
+          href="mailto:futarisushi@gmail.com"
           className="w-full text-center rounded-2xl py-4 text-sm font-black tracking-widest uppercase mt-2 transition-all hover:brightness-110 warm-button"
         >
           Solicita tu cotización
         </a>
 
-        <p className="text-center text-xs mt-0" style={{ color: "#a3a3a3" }}>bazzichicken@gmail.com</p>
+        <p className="text-center text-xs mt-0" style={{ color: "#a3a3a3" }}>futarisushi@gmail.com</p>
       </div>
     </div>
   )

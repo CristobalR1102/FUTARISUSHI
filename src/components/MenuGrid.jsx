@@ -11,7 +11,7 @@ export default function MenuGrid({ activeCategory, cart, onAdd, onRemove, menu }
   return (
     <main className="px-3 sm:px-4 py-5 pb-64">
       <div className="mb-4">
-        <p className="text-xs tracking-[0.22em] uppercase" style={{ color: "var(--muted)" }}>Menú Bazzi</p>
+        <p className="text-xs tracking-[0.22em] uppercase" style={{ color: "var(--muted)" }}>Menú Futari</p>
         <h2 className="font-black text-3xl tracking-[0.04em] uppercase leading-tight text-white">
           {section.category}
         </h2>

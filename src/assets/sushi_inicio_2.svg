@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1400" role="img" aria-labelledby="title desc">
+  <title id="title">Rolls de sushi y salsa soya</title>
+  <desc id="desc">Composición vertical con sushi, wasabi, jengibre y salsa soya.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#061511"/>
+      <stop offset=".5" stop-color="#13231d"/>
+      <stop offset="1" stop-color="#330b12"/>
+    </linearGradient>
+    <radialGradient id="light" cx="44%" cy="30%" r="54%">
+      <stop offset="0" stop-color="#f4d6aa" stop-opacity=".4"/>
+      <stop offset=".65" stop-color="#d3323e" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#050807" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="20" stdDeviation="20" flood-color="#000" flood-opacity=".42"/>
+    </filter>
+  </defs>
+  <rect width="900" height="1400" fill="url(#bg)"/>
+  <rect width="900" height="1400" fill="url(#light)"/>
+  <g opacity=".15" fill="#f8e7ca">
+    <circle cx="98" cy="170" r="5"/>
+    <circle cx="760" cy="260" r="4"/>
+    <circle cx="780" cy="978" r="6"/>
+    <circle cx="144" cy="1100" r="4"/>
+    <circle cx="650" cy="1220" r="5"/>
+  </g>
+  <g filter="url(#shadow)">
+    <ellipse cx="450" cy="780" rx="330" ry="270" fill="#efe0c9"/>
+    <ellipse cx="450" cy="780" rx="290" ry="232" fill="#151916"/>
+    <ellipse cx="450" cy="780" rx="245" ry="188" fill="#f7efe2"/>
+    <g transform="translate(244 660)">
+      <circle cx="72" cy="72" r="72" fill="#091711"/>
+      <circle cx="72" cy="72" r="52" fill="#fff8ed"/>
+      <path d="M43 73c28-44 68-48 97-12-23 47-68 55-97 12Z" fill="#e8424c"/>
+      <circle cx="79" cy="77" r="12" fill="#78af5c"/>
+    </g>
+    <g transform="translate(404 612)">
+      <circle cx="76" cy="76" r="76" fill="#091711"/>
+      <circle cx="76" cy="76" r="55" fill="#fff8ed"/>
+      <circle cx="76" cy="76" r="29" fill="#ff9146"/>
+      <circle cx="88" cy="63" r="13" fill="#78af5c"/>
+      <circle cx="64" cy="91" r="11" fill="#f1c84b"/>
+    </g>
+    <g transform="translate(540 710)">
+      <circle cx="70" cy="70" r="70" fill="#091711"/>
+      <circle cx="70" cy="70" r="49" fill="#fff8ed"/>
+      <path d="M44 71c25-38 61-42 87-10-19 40-60 47-87 10Z" fill="#ffb24d"/>
+      <circle cx="78" cy="76" r="11" fill="#78af5c"/>
+    </g>
+    <g transform="translate(340 842)">
+      <circle cx="70" cy="70" r="70" fill="#091711"/>
+      <circle cx="70" cy="70" r="49" fill="#fff8ed"/>
+      <circle cx="70" cy="70" r="27" fill="#76b15e"/>
+      <circle cx="57" cy="60" r="10" fill="#e8424c"/>
+      <circle cx="84" cy="80" r="10" fill="#f1c84b"/>
+    </g>
+  </g>
+  <g filter="url(#shadow)">
+    <ellipse cx="612" cy="365" rx="96" ry="56" fill="#0b0b09"/>
+    <ellipse cx="612" cy="356" rx="82" ry="42" fill="#2a1510"/>
+    <ellipse cx="612" cy="350" rx="64" ry="25" fill="#4a1b12"/>
+    <path d="M180 330c44-24 92-22 130 8-34 30-78 42-130 22Z" fill="#f3b3a4" opacity=".92"/>
+    <path d="M192 365c38-18 76-14 108 10-26 27-72 35-108 14Z" fill="#ffcabd" opacity=".9"/>
+    <path d="M220 1030c38-74 92-88 134-28-29 66-82 84-134 28Z" fill="#7eb95e"/>
+  </g>
+  <g transform="rotate(24 450 700)">
+    <rect x="162" y="255" width="700" height="16" rx="8" fill="#b16839"/>
+    <rect x="170" y="304" width="700" height="16" rx="8" fill="#7b3e24"/>
+  </g>
+</svg>

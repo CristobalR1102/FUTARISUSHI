@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,25 +9,25 @@ html, body, #root {
 }
 
 :root {
-  --gold: #ff6a1a;
-  --gold-light: #ff9b45;
-  --ember: #d22f12;
-  --ink: #080504;
-  --panel: rgba(22, 16, 12, 0.92);
-  --panel-soft: rgba(32, 22, 15, 0.86);
-  --line: rgba(255, 174, 84, 0.16);
-  --muted: #b8a99b;
-  --paper: #fff4df;
+  --gold: #d22a37;
+  --gold-light: #f4c66a;
+  --ember: #7b1d25;
+  --ink: #070b09;
+  --panel: rgba(16, 24, 20, 0.94);
+  --panel-soft: rgba(26, 34, 27, 0.88);
+  --line: rgba(244, 198, 106, 0.18);
+  --muted: #b8ac9c;
+  --paper: #fff7e9;
 }
 
 body {
   margin: 0;
   color: var(--paper);
   background:
-    radial-gradient(circle at 18% -8%, rgba(255, 106, 26, 0.22), transparent 34rem),
-    radial-gradient(circle at 88% 14%, rgba(210, 47, 18, 0.14), transparent 24rem),
-    linear-gradient(180deg, #170b05 0%, var(--ink) 48%, #050302 100%);
-  font-family: "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+    radial-gradient(circle at 20% -10%, rgba(210, 42, 55, 0.26), transparent 34rem),
+    radial-gradient(circle at 85% 12%, rgba(244, 198, 106, 0.14), transparent 28rem),
+    linear-gradient(180deg, #101812 0%, var(--ink) 50%, #040605 100%);
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -42,21 +44,21 @@ input:focus-visible {
 
 .app-surface {
   background:
-    linear-gradient(180deg, rgba(255, 114, 30, 0.11) 0%, rgba(8, 5, 4, 0) 22rem),
-    radial-gradient(circle at 10% 4%, rgba(255, 154, 69, 0.12), transparent 16rem),
+    linear-gradient(180deg, rgba(210, 42, 55, 0.12) 0%, rgba(7, 11, 9, 0) 24rem),
+    radial-gradient(circle at 8% 3%, rgba(244, 198, 106, 0.11), transparent 18rem),
     var(--ink);
 }
 
 .glass-panel {
-  background: linear-gradient(145deg, rgba(31, 22, 16, 0.96), rgba(12, 8, 6, 0.96));
+  background: linear-gradient(145deg, rgba(24, 32, 27, 0.97), rgba(9, 14, 12, 0.97));
   border: 1px solid var(--line);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .warm-button {
-  background: linear-gradient(135deg, var(--gold-light), var(--gold) 48%, var(--ember));
-  color: #150803;
-  box-shadow: 0 12px 24px rgba(255, 106, 26, 0.24);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold) 52%, var(--ember));
+  color: #fff7e9;
+  box-shadow: 0 12px 28px rgba(210, 42, 55, 0.30);
 }
 
 .warm-button:active {
@@ -74,4 +76,234 @@ input:focus-visible {
 
 .safe-bottom {
   padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+.sushi-motion {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 48% 30%, rgba(255, 236, 192, 0.25), transparent 24rem),
+    radial-gradient(circle at 76% 72%, rgba(210, 42, 55, 0.26), transparent 16rem),
+    linear-gradient(145deg, #061411 0%, #172019 50%, #350b12 100%);
+}
+
+.sushi-motion::before {
+  content: "";
+  position: absolute;
+  inset: -22%;
+  background:
+    linear-gradient(115deg, transparent 0 46%, rgba(255, 247, 233, 0.08) 47% 49%, transparent 50%),
+    repeating-linear-gradient(22deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 24px);
+  animation: drift-light 12s ease-in-out infinite alternate;
+}
+
+.sushi-motion__grain {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 28% 18%, rgba(255,255,255,0.18) 0 1px, transparent 2px),
+    radial-gradient(circle at 70% 68%, rgba(255,255,255,0.12) 0 1px, transparent 2px);
+  background-size: 44px 44px, 68px 68px;
+  opacity: .35;
+}
+
+.sushi-motion__plate {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(78%, 340px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -44%);
+  background:
+    radial-gradient(circle at 50% 50%, #121a16 0 45%, #fff4e3 46% 58%, #111713 59% 63%, rgba(0,0,0,.12) 64%),
+    linear-gradient(135deg, #fff4e3, #c98a4e);
+  box-shadow: 0 28px 60px rgba(0,0,0,.45);
+  animation: plate-breathe 8s ease-in-out infinite;
+}
+
+.sushi-roll,
+.nigiri,
+.soy,
+.wasabi,
+.ginger,
+.chopstick {
+  position: absolute;
+  display: block;
+  filter: drop-shadow(0 16px 18px rgba(0,0,0,.32));
+}
+
+.sushi-roll {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: #07130f;
+}
+
+.sushi-roll::before {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border-radius: 50%;
+  background: #fff8ec;
+}
+
+.sushi-roll i,
+.sushi-roll b,
+.sushi-roll em {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  border-radius: 50%;
+}
+
+.sushi-roll i {
+  inset: 28px;
+  background: #ff8544;
+}
+
+.sushi-roll b {
+  width: 18px;
+  height: 18px;
+  left: 42px;
+  top: 24px;
+  background: #78aa58;
+}
+
+.sushi-roll em {
+  width: 14px;
+  height: 14px;
+  left: 23px;
+  top: 43px;
+  background: #f2c84b;
+}
+
+.roll-one {
+  left: 23%;
+  top: 32%;
+  animation: float-one 7s ease-in-out infinite;
+}
+
+.roll-two {
+  left: 47%;
+  top: 27%;
+  transform: scale(1.08);
+  animation: float-two 8s ease-in-out infinite;
+}
+
+.roll-three {
+  left: 53%;
+  top: 56%;
+  transform: scale(.96);
+  animation: float-one 7.5s ease-in-out infinite reverse;
+}
+
+.nigiri {
+  width: 98px;
+  height: 52px;
+  border-radius: 24px;
+  background: #fff8ec;
+}
+
+.nigiri::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 7px;
+  height: 34px;
+  border-radius: 50%;
+  background: #e9474f;
+  transform: rotate(-8deg);
+}
+
+.nigiri-two::before {
+  background: #ff9f45;
+  transform: rotate(9deg);
+}
+
+.nigiri-one {
+  left: 20%;
+  top: 57%;
+  animation: float-two 8.5s ease-in-out infinite;
+}
+
+.nigiri-two {
+  left: 52%;
+  top: 42%;
+  animation: float-one 9s ease-in-out infinite;
+}
+
+.soy {
+  right: 10%;
+  top: 16%;
+  width: 74px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 42%, #4a1b12 0 48%, #0b0b09 50% 100%);
+}
+
+.wasabi {
+  left: 16%;
+  bottom: 16%;
+  width: 54px;
+  height: 42px;
+  border-radius: 55% 45% 45% 55%;
+  background: #78aa58;
+  transform: rotate(-18deg);
+}
+
+.ginger {
+  right: 17%;
+  bottom: 14%;
+  width: 72px;
+  height: 42px;
+  border-radius: 50%;
+  background: #f1b1a4;
+  transform: rotate(12deg);
+}
+
+.chopstick {
+  left: 12%;
+  top: 20%;
+  width: 78%;
+  height: 12px;
+  border-radius: 999px;
+  background: #9b5631;
+  transform: rotate(-31deg);
+  transform-origin: left center;
+  animation: chopstick-sway 9s ease-in-out infinite;
+}
+
+.chopstick-two {
+  top: 24%;
+  background: #6f3a24;
+  animation-delay: -1.2s;
+}
+
+@keyframes drift-light {
+  from { transform: translate3d(-4%, -2%, 0) rotate(0deg); }
+  to { transform: translate3d(4%, 3%, 0) rotate(2deg); }
+}
+
+@keyframes plate-breathe {
+  0%, 100% { transform: translate(-50%, -44%) scale(1); }
+  50% { transform: translate(-50%, -45%) scale(1.025); }
+}
+
+@keyframes float-one {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
+
+@keyframes float-two {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 8px 9px; }
+}
+
+@keyframes chopstick-sway {
+  0%, 100% { transform: rotate(-31deg) translateX(0); }
+  50% { transform: rotate(-29deg) translateX(8px); }
 }

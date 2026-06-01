@@ -1,18 +1,37 @@
 import { useState, useEffect, useRef } from "react"
-import logo from "../assets/LOGGO_BAZZI_CHICKEN.png"
-import foto1 from "../assets/foto_inicio2.jpeg"
-import foto2 from "../assets/foto_inicio3.jpeg"
+import logo from "../assets/futari-logo.svg"
+import foto1 from "../assets/sushi_inicio_1.svg"
+import foto2 from "../assets/sushi_inicio_2.svg"
 
 const slides = [
   {
-    type: "video",
-    src: "https://gnenxuwzljdguzftflov.supabase.co/storage/v1/object/public/productos/video_inicio.mp4",
-    alt: "Video de Bazzi Chicken",
+    type: "motion",
+    alt: "Sushi de FUTARI SUSHI",
     duration: 10000
   },
-  { type: "image", src: foto1, alt: "Foto de Bazzi Chicken", duration: 6000 },
-  { type: "image", src: foto2, alt: "Foto de Bazzi Chicken", duration: 6000 }
+  { type: "image", src: foto1, alt: "Tabla de sushi FUTARI SUSHI", duration: 6000 },
+  { type: "image", src: foto2, alt: "Rolls de sushi FUTARI SUSHI", duration: 6000 }
 ]
+
+function SushiMotion() {
+  return (
+    <div className="sushi-motion" aria-label="Animación de sushi FUTARI SUSHI">
+      <div className="sushi-motion__grain" />
+      <div className="sushi-motion__plate">
+        <span className="sushi-roll roll-one"><i /><b /><em /></span>
+        <span className="sushi-roll roll-two"><i /><b /><em /></span>
+        <span className="sushi-roll roll-three"><i /><b /><em /></span>
+        <span className="nigiri nigiri-one" />
+        <span className="nigiri nigiri-two" />
+        <span className="soy" />
+        <span className="wasabi" />
+        <span className="ginger" />
+      </div>
+      <span className="chopstick chopstick-one" />
+      <span className="chopstick chopstick-two" />
+    </div>
+  )
+}
 
 export default function Inicio({ onVerMenu, onEspecial }) {
   const [fotoActual, setFotoActual] = useState(0)
@@ -50,13 +69,13 @@ export default function Inicio({ onVerMenu, onEspecial }) {
     <div className="min-h-screen flex flex-col app-surface safe-bottom">
       <section className="px-4 pt-8 pb-4">
         <div className="max-w-md mx-auto flex items-center gap-4">
-          <img src={logo} alt="Bazzi Chicken" className="w-24 h-24 object-contain drop-shadow-[0_12px_28px_rgba(255,106,26,0.24)]" />
+          <img src={logo} alt="FUTARI SUSHI" className="w-24 h-24 object-contain drop-shadow-[0_12px_28px_rgba(210,42,55,0.24)]" />
           <div className="min-w-0">
             <p className="text-xs tracking-[0.22em] uppercase" style={{ color: "var(--muted)" }}>Maipú</p>
             <h1 className="font-black text-4xl tracking-[0.08em] leading-none mt-1" style={{ color: "var(--gold)" }}>
-              BAZZI
+              FUTARI
             </h1>
-            <p className="font-black text-xl tracking-[0.12em] leading-none text-white">CHICKEN</p>
+            <p className="font-black text-xl tracking-[0.12em] leading-none text-white">SUSHI</p>
           </div>
         </div>
       </section>
@@ -73,18 +92,8 @@ export default function Inicio({ onVerMenu, onEspecial }) {
             className="absolute inset-0 transition-opacity duration-700"
             style={{ opacity: i === fotoActual ? 1 : 0 }}
           >
-            {slide.type === "video" ? (
-              <video
-                src={slide.src}
-                className="w-full h-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                aria-label={slide.alt}
-                onClick={(e) => e.target.play()}
-              />
+            {slide.type === "motion" ? (
+              <SushiMotion />
             ) : (
               <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" />
             )}
@@ -98,7 +107,7 @@ export default function Inicio({ onVerMenu, onEspecial }) {
             <span className="w-2 h-2 rounded-full" style={{ background: abierto ? "#4ade80" : "#f87171" }} />
             {abierto ? "Abierto ahora" : "Cerrado ahora"}
           </div>
-          <p className="text-3xl font-black leading-tight text-white">Pollo asado, papas y sabor de barrio.</p>
+          <p className="text-3xl font-black leading-tight text-white">Sushi fresco, rolls y sabor para compartir.</p>
         </div>
 
         <div className="absolute top-4 right-4 flex gap-2">
@@ -139,7 +148,7 @@ export default function Inicio({ onVerMenu, onEspecial }) {
           SERVICIOS ESPECIALES
         </button>
         <a
-          href="https://www.instagram.com/bazzichicken/"
+          href="https://www.instagram.com/futarisushi/"
           target="_blank"
           rel="noreferrer"
           className="w-full rounded-2xl py-4 font-black text-sm tracking-widest transition-colors border flex items-center justify-center gap-2"

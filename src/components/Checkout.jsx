@@ -25,7 +25,7 @@ export default function Checkout({ cart, onBack, onAdd, onRemove }) {
     const horarioTexto = horario === "ahora" ? "Lo antes posible" : `Para las ${hora}`
 
     const msg =
-      `*Pedido BAZZI CHICKEN*\n\n` +
+      `*Pedido FUTARI SUSHI*\n\n` +
       `*Cliente:* ${nombre}\n` +
       `*Método de pago:* ${pago}\n` +
       `*Horario:* ${horarioTexto}\n\n` +
